@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de" ng-app="adBoxx">
+    <head>
+    <link href="https://fonts.googleapis.com/css?family=Covered+By+Your+Grace|Cabin+Sketch|Rock+Salt|Droid+Sans" rel="stylesheet">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
+        <title>UAS WebApp</title>
+
+        <!-- bower:css -->
+        <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+        <!-- endInject -->
+        <!-- inject:css -->
+        <link rel="stylesheet" href="/app/styles/styles.css">
+        <!-- endInject -->
+        </head>
+    <body ng-controller="AppCtrl">
+        <div class="row ui-sortable-placehold" id="placeholder-toolbar"> 
+
+        </div>
+
+        <div id="contentPane" ui-view flex style="overflow: hidden !important;"> <!-- Contentpage -->
+        </div>
+        ´
+
+        <!-- bower:js -->
+        <script src="/bower_components/angular/angular.js"></script>
+        <script src="/bower_components/angular-route/angular-route.js"></script>
+        <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="/bower_components/angular-animate/angular-animate.js"></script>
+        <script src="/bower_components/angular-aria/angular-aria.js"></script>
+        <script src="/bower_components/angular-messages/angular-messages.js"></script>
+        <script src="/bower_components/angular-translate/angular-translate.js"></script>
+        <script src="/bower_components/angular-material/angular-material.js"></script>
+        <!-- endInject -->
+        <!-- inject:js -->
+        <script src="/app/app.js"></script>
+        <script src="/app/components/app.controller.js"></script>
+        <script src="/app/components/translationProvider.js"></script>
+        <script src="/app/config/config.js"></script>
+        <script src="/app/components/main/main.controller.js"></script>
+        <!-- endinject -->
+
+</body>
+</html>
