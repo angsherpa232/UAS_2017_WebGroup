@@ -10,34 +10,36 @@
 
         $scope.$watch(function () {
             return $mdMedia('xs');
-        }, function (big) {
-            console.log("screen is XS:" + big);
-            $scope.screenIsXS = big;
+        }, function (size) {
+            console.log("screen is XS:" + size);
+            $scope.screenIsXS = size;
         });
         
         $scope.$watch(function () {
             return $mdMedia('sm');
-        }, function (big) {
-            console.log("screen is SM:" + big);
-            $scope.screenIsSM = big;
+        }, function (size) {
+            console.log("screen is SM:" + size);
+            $scope.screenIsSM = size;
         });
         
         $scope.$watch(function () {
             return $mdMedia('md');
-        }, function (big) {
-            console.log("screen is MD:" + big);
-            $scope.screenIsMD = big;
+        }, function (size) {
+            console.log("screen is MD:" + size);
+            $scope.screenIsMD = size;
         });
         
         $scope.$watch(function () {
             return $mdMedia('gt-md');
-        }, function (big) {
-            console.log("screen is gt-MD:" + big);
-            $scope.screenIsGTMD = big;
+        }, function (size) {
+            console.log("screen is gt-MD:" + size);
+            $scope.screenIsGTMD = size;
         });
+        
+        $scope.mapHeight = window.innerHeight - 80;
     };
     
-    angular.module('adBoxx')
-            .controller('AppCtrl', AppCtrl)
+    angular.module('UASWebApp')
+            .controller('AppCtrl', AppCtrl);
     
 })();

@@ -11,17 +11,17 @@
                     controller: 'MainCtrl',
                     authenticate: false
                 })
-                .state('boxads', {
-                    url: '/boxads',
-                    controller: 'BoxAddsCtrl',
-                    templateUrl: 'app/components/boxadspage/boxads.html',
+                .state('about', {
+                    url: '/about',
+                    controller: 'AboutCtrl',
+                    templateUrl: 'app/components/aboutpage/about.html',
                     authenticate: false
                 });
 
         $urlRouterProvider.otherwise('/main');
 
         $mdThemingProvider
-                .definePalette('adboxx-one', {
+                .definePalette('UASWebApp-one', {
                     '50': '1A80C1',
                     '100': '1A80C1',
                     '200': '1A80C1',
@@ -41,7 +41,7 @@
                         '200', '300', '400', 'A100'],
                     'contrastLightColors': undefined
                 })
-                .definePalette('adboxx-two', {
+                .definePalette('UASWebApp-two', {
                     '50': '8cbf3f',
                     '100': '8cbf3f',
                     '200': '8cbf3f',
@@ -62,10 +62,10 @@
                     'contrastLightColors': undefined
                 })
                 .theme('default')
-                .primaryPalette('adboxx-one', {
+                .primaryPalette('UASWebApp-one', {
                     'default': '500'
                 })
-                .accentPalette('adboxx-two', {
+                .accentPalette('UASWebApp-two', {
                     'default': '500'
                 })
                 .warnPalette('pink');
@@ -78,6 +78,6 @@
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }
 
-    angular.module('adBoxx')
+    angular.module('UASWebApp')
             .config(config);
 })();

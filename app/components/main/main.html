@@ -1,4 +1,11 @@
 <!-- Main HTML content -->
-<div flex layout="column">
+<div class="map" flex layout="column">
     <!-- put leaflet inside 'nd stuff... -->
+    <leaflet 
+        center="map.center"
+        layers="map.layers" 
+        defaults="map.defaults" 
+        height="{{mapHeight}}">
+    </leaflet>
+    
 </div>

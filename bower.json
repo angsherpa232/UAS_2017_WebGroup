@@ -1,6 +1,6 @@
 {
-  "name": "ad-boxx-website",
-  "description": "responsive website of adboxx",
+  "name": "uas-webapp",
+  "description": "responsive webapp of UAS_2017",
   "main": "app.js",
   "authors": [
     "Maurin Radtke"
@@ -17,10 +17,13 @@
     "angular-route": "1.5.8",
     "angular-ui-router": "^0.2.18",
     "angular-material": "~1.1.1",
-    "angular-translate": "^2.11.0",
-    "angular-animate": "1.5.8"
+    "angular-animate": "1.5.8",
+    "angular-cookies": "1.5.8",
+    "ui-leaflet": "^2.0.0",
+    "angular-translate": "^2.15.1"
   },
   "resolutions": {
-    "angular": "1.5.8"
+    "angular": "1.x",
+    "angular-ui-router": "^1.0.3"
   }
 }

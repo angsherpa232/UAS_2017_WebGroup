@@ -1,12 +1,14 @@
 (function () {
     'use strict';
-    angular.module('adBoxx', [
+    angular.module('UASWebApp', [
         'ui.router',
+        'ui-leaflet',
         'ngMaterial',
         'ngAnimate',
+        'ngCookies',
         'pascalprecht.translate',
         'translations'])
-            .value("aBBaseUrl", "https://ad-boxx.de")
+            //.value("UASBaseUrl", "https://ad-boxx.de")
             .run(function($rootScope){
                 console.log("app started.");
         });

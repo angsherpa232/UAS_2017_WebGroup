@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html lang="de" ng-app="adBoxx">
+<html lang="en" ng-app="UASWebApp">
     <head>
-    <link href="https://fonts.googleapis.com/css?family=Covered+By+Your+Grace|Cabin+Sketch|Rock+Salt|Droid+Sans" rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/css?family=Covered+By+Your+Grace|Cabin+Sketch|Rock+Salt|Droid+Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
         <title>UAS WebApp</title>
 
         <!-- bower:css -->
+        <link rel="stylesheet" href="/bower_components/leaflet/dist/leaflet.css">
         <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
         <!-- endInject -->
         <!-- inject:css -->
         <link rel="stylesheet" href="/app/styles/styles.css">
         <!-- endInject -->
-        </head>
-    <body ng-controller="AppCtrl">
-        <div class="row ui-sortable-placehold" id="placeholder-toolbar"> 
 
-        </div>
+    </head>
+    <body ng-controller="AppCtrl">
+
+        <uas-toolbar id="main-toolbar"> </uas-toolbar> <!-- Toolbar -->
 
         <div id="contentPane" ui-view flex style="overflow: hidden !important;"> <!-- Contentpage -->
         </div>
@@ -29,8 +32,12 @@
         <script src="/bower_components/angular-animate/angular-animate.js"></script>
         <script src="/bower_components/angular-aria/angular-aria.js"></script>
         <script src="/bower_components/angular-messages/angular-messages.js"></script>
+        <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="/bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+        <script src="/bower_components/leaflet/dist/leaflet-src.js"></script>
         <script src="/bower_components/angular-translate/angular-translate.js"></script>
         <script src="/bower_components/angular-material/angular-material.js"></script>
+        <script src="/bower_components/ui-leaflet/dist/ui-leaflet.js"></script>
         <!-- endInject -->
         <!-- inject:js -->
         <script src="/app/app.js"></script>
@@ -38,7 +45,11 @@
         <script src="/app/components/translationProvider.js"></script>
         <script src="/app/config/config.js"></script>
         <script src="/app/components/main/main.controller.js"></script>
+        <script src="/app/components/toolbar/toolbar.controller.js"></script>
+        <script src="/app/components/toolbar/toolbar.directive.js"></script>
+        <script src="/app/components/toolbar/toolbar.partials/language_menu/language_menu.controller.js"></script>
+        <script src="/app/components/toolbar/toolbar.partials/language_menu/language_menu.directive.js"></script>
         <!-- endinject -->
 
-</body>
+    </body>
 </html>
