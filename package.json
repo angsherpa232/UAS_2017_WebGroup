@@ -1,22 +1,29 @@
 {
-    "name": "ad-boxx-website",
-    "version": "1.0.0",
-    "keywords": ["util", "functional", "server", "client", "browser"],
-    "author": "Maurin",
-    "contributors": [],
-    "dependencies": {},
-      "version": "0.0.1",
-    "description": "responsive website of adboxx",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "devDependencies": {
-        "gulp": "^3.9.1",
-        "gulp-connect": "^5.0.0",
-        "gulp-inject": "^4.1.0",
-        "gulp-ruby-sass": "^2.1.0",
-        "gulp-sass": "^2.3.2",
-        "main-bower-files": "^2.13.1"
-    }
+  "name": "UAS WebApp",
+  "version": "0.0.1",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "Maurin",
+  "contributors": [],
+  "dependencies": {
+    "express": "^4.15.3"
+  },
+  "description": "responsive website of UAV WebApp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-inject": "^4.1.0",
+    "gulp-ruby-sass": "^2.1.0",
+    "gulp-sass": "^2.3.2",
+    "main-bower-files": "^2.13.1"
+  }
 }
