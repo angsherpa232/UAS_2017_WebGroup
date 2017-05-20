@@ -28,8 +28,6 @@ Run the development web-server via gulp:
 
     $ gulp
 
-* if you got an error, you probably have no installed gulp yet. Install it using npm: ```$ npm install gulp-cli -g```. After isntallation, try again running the project with ```$ gulp```.
-
 You can now have a quick look on the Webapp via your webbrowser at 
 ```localhost:4014``` or ```127.0.0.1:4014```
 
@@ -49,5 +47,3 @@ TODO...
 ## Deployment:
 
 Run ```$gulp release``` in order to automatically create a single all.js file containing the entire javascript files of the webapp in a concatinated and minified form. Then, you can simply deploy the javascript sources using the all.js file, for example using nodeJS: ```$ node all.js```.
-
-* if you get an error on gulp release, you might have to install stream-series, gulp-concat, gulp-uglify, browserify using npm such as: ```$ npm install stream-series --save```.
