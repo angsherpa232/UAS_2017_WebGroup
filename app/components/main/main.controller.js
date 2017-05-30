@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     function MainCtrl($scope, $timeout) {
-		var imageLayer; //This is Gebru's repository
+		var imageLayer; //This is Gebru's repository.
 		var executed = false;
 		var ctrl = new L.LayerGroup();
 		var map;
