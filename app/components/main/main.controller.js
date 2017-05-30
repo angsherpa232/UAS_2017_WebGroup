@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     function MainCtrl($scope, $timeout) {
-		var imageLayer; //Layer // comment
+		var imageLayer; //This is a branch of Nimrod the great
 		var executed = false;
 		var ctrl = new L.LayerGroup();
 		var map;
