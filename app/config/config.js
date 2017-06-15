@@ -11,6 +11,18 @@
                     controller: 'MainCtrl',
                     authenticate: false
                 })
+                .state('home', {
+                    url: '/home',
+                    controller: 'HomeCtrl',
+                    templateUrl: 'app/components/homepage/home.html',
+                    authenticate: false
+                })
+                .state('video', {
+                    url: '/video',
+                    controller: 'VideoCtrl',
+                    templateUrl: 'app/components/videopage/video.html',
+                    authenticate: false
+                })
                 .state('about', {
                     url: '/about',
                     controller: 'AboutCtrl',

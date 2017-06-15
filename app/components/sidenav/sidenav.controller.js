@@ -1,9 +1,9 @@
 (function () {
     'use strict';
 
-    function ToolbarCtrl($rootScope, $scope, $timeout, $mdSidenav) {
+    function SidenavCtrl($rootScope, $scope, $timeout, $mdSidenav, $log) {
 
-        console.log('ToolbarCtrl started.');
+        console.log('SidenavCtrl started.');
         $scope.title = 'UAS Webapp';
 
         $scope.toggleLeft = buildDelayedToggler('left');
@@ -60,7 +60,7 @@
 
 
     angular.module('UASWebApp')
-        .controller('ToolbarCtrl', ToolbarCtrl);
+        .controller('SidenavCtrl', SidenavCtrl);
 
 
 })();
