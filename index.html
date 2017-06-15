@@ -20,6 +20,9 @@
     <body ng-controller="AppCtrl">
 
         <uas-toolbar id="main-toolbar"> </uas-toolbar> <!-- Toolbar -->
+        <div layout="row" layout="vertical">
+            <uas-sidenav id="main-sidenav"> </uas-sidenav> <!-- Toolbar -->
+        </div>
 
         <div id="contentPane" ui-view flex style="overflow: hidden !important;"> <!-- Contentpage -->
         </div>
@@ -44,9 +47,16 @@
         <script src="app/components/app.controller.js"></script>
         <script src="app/components/translationProvider.js"></script>
         <script src="app/config/config.js"></script>
+        <script src="app/components/aboutpage/about.controller.js"></script>
+        <script src="app/components/aboutpage/about.directive.js"></script>
+        <script src="app/components/homepage/home.controller.js"></script>
+        <script src="app/components/homepage/home.directive.js"></script>
         <script src="app/components/main/main.controller.js"></script>
+        <script src="app/components/sidenav/sidenav.controller.js"></script>
+        <script src="app/components/sidenav/sidenav.directive.js"></script>
         <script src="app/components/toolbar/toolbar.controller.js"></script>
         <script src="app/components/toolbar/toolbar.directive.js"></script>
+        <script src="app/components/videopage/video.controller.js"></script>
         <script src="app/components/toolbar/toolbar.partials/language_menu/language_menu.controller.js"></script>
         <script src="app/components/toolbar/toolbar.partials/language_menu/language_menu.directive.js"></script>
         <!-- endinject -->

@@ -1,7 +1,8 @@
 (function () {
     'use strict';
     function MainCtrl($scope, $timeout) {
-		var imageLayer; //Layer // comment
+
+		var imageLayer; //This is Jeison's repository if you are not me f*ck you
 		var executed = false;
 		var ctrl = new L.LayerGroup();
 		var map;
@@ -45,13 +46,14 @@
 		$scope.zoomRiver=function (){
 			map.setView([51.943703,7.573759], 16);
 		}
-		
+
         $timeout(function () {
-            window.dispatchEvent(new Event('resize'))
-        },
-                200);
+                window.dispatchEvent(new Event('resize'))
+            },
+            200);
     }
     ;
     angular.module('UASWebApp')
-            .controller('MainCtrl', MainCtrl);
+        .controller('MainCtrl', MainCtrl)
+        ;
 })();
