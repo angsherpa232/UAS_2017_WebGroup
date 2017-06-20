@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    function MainCtrl($scope, $timeout) {
+    function MainCtrl($scope, $timeout, $mdSidenav) {
 
 		var imageLayer; //This is Jeison's repository if you are not me f*ck you
 		var executed = false;
@@ -39,16 +39,16 @@
 			};
 			ctrl = L.control.layers(baseLayers).addTo(map);
 
-		} //end of createMap Function
+		}; //end of createMap Function
         
-		$scope.createMap() 
+		$scope.createMap();
 		
 		$scope.zoomRiver=function (){
 			map.setView([51.943703,7.573759], 16);
-		}
+		};
 
         $timeout(function () {
-                window.dispatchEvent(new Event('resize'))
+                window.dispatchEvent(new Event('resize'));
             },
             200);
     }

@@ -115,7 +115,8 @@ md-toolbar {
 html, body {
   height: 100%;
   position: relative;
-  background-color: #FFFFFF; }
+  background-color: #FFFFFF;
+  width: 100%; }
 
 #contentPane {
   background-color: #FFFFFF;
@@ -125,13 +126,20 @@ html, body {
 #placeholder-right, #placeholder-left {
   background-color: #FFFFFF; }
 
+#mapid {
+  width: 100%;
+  height: 90%;
+  position: absolute; }
+
 .uas-sidenav {
   top: 60px;
   max-width: 200px;
-  position: fixed; }
+  position: fixed;
+  z-index: 2300; }
 
 .md-sidenav-backdrop {
-  position: fixed; }
+  position: fixed;
+  z-index: 2200; }
 
 .uas-sidenav .button-icon {
   height: 20px;
