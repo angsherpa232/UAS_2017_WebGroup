@@ -20,8 +20,6 @@ Install bower components:
 
     $ bower install
 
-* if you got an error, you probably have not installed bower before. Install it using npm ```$ npm install bower -g```. After installing bower, retry installing the bower dependencies with ```$ bower install```
-
 ## Run it:
 
 Run the development web-server via gulp:

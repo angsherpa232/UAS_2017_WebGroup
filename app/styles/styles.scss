@@ -1,13 +1,13 @@
 /* Animations */
 /* The starting CSS styles for the enter animation */
 .fade.ng-enter {
-  transition: 0.5s linear all;
-  opacity: 0;
+    transition: 0.5s linear all;
+    opacity: 0;
 }
 
 /* The finishing CSS styles for the enter animation */
 .fade.ng-enter.ng-enter-active {
-  opacity: 1;
+    opacity: 1;
 }
 
 /**
@@ -25,140 +25,140 @@
 [ng-click],
 [data-ng-click],
 [x-ng-click] {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 /* Rules for sizing the icon. */
 .material-icons.md-10 {
-  font-size: 10px;
+    font-size: 10px;
 }
 
 .material-icons.md-18 {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 .material-icons.md-24 {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 .material-icons.md-36 {
-  font-size: 36px;
+    font-size: 36px;
 }
 
 .material-icons.md-48 {
-  font-size: 48px;
+    font-size: 48px;
 }
 
 .material-icons.md-128 {
-  font-size: 128px;
+    font-size: 128px;
 }
 
 /* Rules for using icons as black on a light background. */
 .material-icons.md-dark {
-  color: rgba(0, 0, 0, 0.54);
+    color: rgba(0, 0, 0, 0.54);
 }
 
 .material-icons.md-dark.md-inactive {
-  color: rgba(0, 0, 0, 0.26);
+    color: rgba(0, 0, 0, 0.26);
 }
 
 /* Rules for using icons as white on a dark background. */
 .material-icons.md-light {
-  color: rgba(255, 255, 255, 1);
+    color: rgba(255, 255, 255, 1);
 }
 
 .material-icons.md-light.md-inactive {
-  color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.3);
 }
 
 // libs overrides
 .material-icons {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 
 ::before, ::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 *:focus {
-  outline: none;
+    outline: none;
 }
 
 ::before, ::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .flex {
-  -webkit-box-flex: 1;
-  flex: 1;
-  box-sizing: border-box;
+    -webkit-box-flex: 1;
+    flex: 1;
+    box-sizing: border-box;
 }
 
 .material-icons.grey leg {
-  color: #616161;
+    color: #616161;
 }
 
 .material-icons.blue {
-  color: #1A80C1;
+    color: #1A80C1;
 }
 
 #mapid {
-  width: 100%;
+    width: 100%;
 }
 
 #main-toolbar {
-  position: fixed;
-  width: 100%;
-  height: 60px;
-  max-height: 60px;
-  min-height: 60px;
-  z-index: 1900;
-  .logo-icon {
-    width: 90px;
-    height: 40px;
-  }
-  language-menu {
-    margin-bottom: 8px;
-  }
-  img {
-    padding-bottom: 2px;
-  }
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    max-height: 60px;
+    min-height: 60px;
+    z-index: 1900;
+    .logo-icon {
+        width: 90px;
+        height: 40px;
+    }
+    language-menu {
+        margin-bottom: 8px;
+    }
+    img {
+        padding-bottom: 2px;
+    }
 }
 
 md-toolbar {
-  // toolbars
-  height: 60px;
-  max-height: 60px;
-  min-height: 60px;
-  md-icon {
-    display: block !important;
-    height: auto;
-  }
+    // toolbars
+    height: 60px;
+    max-height: 60px;
+    min-height: 60px;
+    md-icon {
+        display: block !important;
+        height: auto;
+    }
 }
 
 .UASWebApp-one {
-  color: #1A80C1;
+    color: #1A80C1;
 }
 
 .UASWebApp-two {
-  color: #8CBF3F;
+    color: #8CBF3F;
 }
 
 html, body {
-  height: 100%;
-  position: relative;
-  background-color: #FFFFFF;
-  width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #FFFFFF;
+    width: 100%;
 }
 
 #contentPane {
-  background-color: #FFFFFF;
-  width: 100%;
-  padding-top: 60px;
+    background-color: #FFFFFF;
+    width: 100%;
+    padding-top: 60px;
 }
 
 #placeholder-right, #placeholder-left {
-  background-color: #FFFFFF;
+    background-color: #FFFFFF;
 }
 
 .map{
@@ -171,42 +171,59 @@ html, body {
 }
 
 .uas-sidenav {
-  top: 60px;
-  max-width: 200px;
-  position:fixed;
-  z-index: 2300;
+    top: 60px;
+    max-width: 200px;
+    position:fixed;
+    z-index: 2300;
 }
 
 .md-sidenav-backdrop {
-  position:fixed;
-  z-index: 2200;
-     }
+    position:fixed;
+    z-index: 2200;
+}
 
 .uas-sidenav .button-icon {
-  height: 20px;
-  width: 20px;
-  padding: 7px 0 0px;
-  vertical-align: middle;
-  float: left;
+    height: 20px;
+    width: 20px;
+    padding: 7px 0 0px;
+    vertical-align: middle;
+    float: left;
 }
 
 .uas-sidenav .md-accent span {
-  /* position: relative; */
-  /* text-align: left; */
-  /* display: inline-block; */
-  float: left;
-  margin-left: 10px;
+    /* position: relative; */
+    /* text-align: left; */
+    /* display: inline-block; */
+    float: left;
+    margin-left: 10px;
 }
 
 .uas-sidenav .uas-md-button {
-  width: 150px;
-  color: rgb(94, 103, 121);
+    width: 150px;
+    color: rgb(94, 103, 121);
 }
 
 .uas-sidenav .close-button-img {
-  float: right;
-  top: 20px;
-  position: absolute;
-  right: 20px;
-  padding: 0px;
+    float: right;
+    top: 20px;
+    position: absolute;
+    right: 20px;
+    padding: 0px;
+}
+
+.aboutpage {
+    h1 {
+        text-align: center;
+    }
+    p {
+        text-align: center;
+    }
+    ul {
+        text-align: center;
+    }
+    footer {
+        padding: 1em;
+        clear: left;
+        text-align: center;
+    }
 }
