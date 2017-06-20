@@ -5,8 +5,8 @@
         console.log('run config');
 
         $stateProvider
-                .state('main', {
-                    url: '/main',
+                .state('map', {
+                    url: '/map',
                     templateUrl: 'app/components/main/main.html',
                     controller: 'MainCtrl',
                     authenticate: false
@@ -30,7 +30,7 @@
                     authenticate: false
                 });
 
-        $urlRouterProvider.otherwise('/main');
+        $urlRouterProvider.otherwise('/home');
 
         $mdThemingProvider
                 .definePalette('UASWebApp-one', {

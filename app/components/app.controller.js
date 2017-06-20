@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function AppCtrl($rootScope, $scope, $mdMedia, $window) {
+    function AppCtrl($rootScope, $state, $scope, $mdMedia, $window) {
         $scope.message = 'Initial Setup';
         $scope.screenIsXS = $mdMedia('xs');
         $scope.screenIsSM = $mdMedia('sm');
@@ -39,11 +39,30 @@
         angular.element($window).bind('resize', function () {
                         $scope.$apply(function () {
                             $scope.width = $window.innerWidth;
-                            $scope.height = $window.innerHeight - 200;
-                            console.log($scope.width);
+                            $scope.height = $window.innerHeight - 62;
                             console.log($scope.height);
                         });
                     });
+        
+        $scope.home = function(){
+            $state.go('home', {
+            });
+        };
+        
+        $scope.map = function(){
+            $state.go('map', {
+            });
+        };
+        
+        $scope.video = function(){
+            $state.go('video', {
+            });
+        };
+        
+        $scope.about = function(){
+            $state.go('about', {
+            });
+        };
     }
     ;
 
