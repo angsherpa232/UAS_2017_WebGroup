@@ -165,3 +165,17 @@ html, body {
   position: absolute;
   right: 20px;
   padding: 0px; }
+
+.aboutpage h1 {
+  text-align: center; }
+
+.aboutpage p {
+  text-align: center; }
+
+.aboutpage ul {
+  text-align: center; }
+
+.aboutpage footer {
+  padding: 1em;
+  clear: left;
+  text-align: center; }
