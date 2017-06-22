@@ -87,14 +87,18 @@
     min-height: 60px;
     z-index: 1900;
     .logo-icon {
-        width: 90px;
-        height: 40px;
+        width: 65px;
+        height: 55px;
     }
     language-menu {
         margin-bottom: 8px;
     }
     img {
         padding-bottom: 2px;
+    }
+
+    .toolbar-title{
+        padding-left: 20px;
     }
 }
 
