@@ -1,7 +1,8 @@
 (function () {
     'use strict';
-    function MainCtrl($scope, $timeout) {
-		var imageLayer; //This is Gebru's repository.
+    function MainCtrl($scope, $timeout, $mdSidenav) {
+
+		var imageLayer;
 		var executed = false;
 		var ctrl = new L.LayerGroup();
 		var map;
@@ -38,20 +39,21 @@
 			};
 			ctrl = L.control.layers(baseLayers).addTo(map);
 
-		} //end of createMap Function
+		}; //end of createMap Function
         
-		$scope.createMap() 
+		$scope.createMap();
 		
 		$scope.zoomRiver=function (){
 			map.setView([51.943703,7.573759], 16);
-		}
-		
+		};
+
         $timeout(function () {
-            window.dispatchEvent(new Event('resize'))
-        },
-                200);
+                window.dispatchEvent(new Event('resize'));
+            },
+            200);
     }
     ;
     angular.module('UASWebApp')
-            .controller('MainCtrl', MainCtrl);
+        .controller('MainCtrl', MainCtrl)
+        ;
 })();

@@ -4,9 +4,10 @@
 
         <link href="https://fonts.googleapis.com/css?family=Covered+By+Your+Grace|Cabin+Sketch|Rock+Salt|Droid+Sans" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32"/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
-        <title>UAS WebApp</title>
+        <title>UAaS</title>
 
         <!-- bower:css -->
         <!-- endInject -->
@@ -17,6 +18,9 @@
     <body ng-controller="AppCtrl">
 
         <uas-toolbar id="main-toolbar"> </uas-toolbar> <!-- Toolbar -->
+        <div layout="row" layout="vertical">
+            <uas-sidenav id="main-sidenav"> </uas-sidenav> <!-- Toolbar -->
+        </div>
 
         <div id="contentPane" ui-view flex style="overflow: hidden !important;"> <!-- Contentpage -->
         </div>

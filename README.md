@@ -20,8 +20,6 @@ Install bower components:
 
     $ bower install
 
-* if you got an error, you probably have not installed bower before. Install it using npm ```$ npm install bower -g```. After installing bower, retry installing the bower dependencies with ```$ bower install```
-
 ## Run it:
 
 Run the development web-server via gulp:
@@ -31,10 +29,23 @@ Run the development web-server via gulp:
 You can now have a quick look on the Webapp via your webbrowser at 
 ```localhost:4014``` or ```127.0.0.1:4014```
 
-### Changing the port 
+Not a fan of gulp? Then run it via NodeJS: 
+    
+    $ node all.js
+
+Have a look on the Webapp via your webbrowser at
+```localhost:4014``` or ```127.0.0.1:4014```
+
+### Changing the port:
+* for gulp:
 4014 is the default port for this project, if you want or have to change it, 
-open the project's ```/node_modules/gulpfile.js``` and change the port in line 
-17 to your desire.
+open the project's ```/gulpfile.js``` and change the port in line 
+19 to your desire.
+
+* for node:
+if you want or have to change port when hosting via nodeJS, 
+open the project's ```/all.js``` and change the port in line 
+7 to your desire.
 
 ## Basic Useage:
 
@@ -43,7 +54,3 @@ TODO...
 ## Motivation Behind the project
 
 TODO...
-
-## Deployment:
-
-Run ```$gulp release``` in order to automatically create a single all.js file containing the entire javascript files of the webapp in a concatinated and minified form. Then, you can simply deploy the javascript sources using the all.js file, for example using nodeJS: ```$ node all.js```.
