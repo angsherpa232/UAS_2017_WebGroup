@@ -181,3 +181,24 @@ html, body {
   padding: 1em;
   clear: left;
   text-align: center; }
+
+.homepage h1 {
+  text-align: left; }
+
+.homepage p {
+  text-align: left; }
+
+.homepage ul {
+  text-align: left;
+  padding-left: 0px; }
+
+.homepage footer {
+  padding: 1em;
+  clear: left;
+  text-align: center; }
+
+.homepage footer p {
+  text-align: center; }
+
+.homepage .sub-tree {
+  padding-left: 50px; }
