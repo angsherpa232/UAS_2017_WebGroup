@@ -79,6 +79,9 @@
     width: 100%;
 }
 
+
+
+
 #main-toolbar {
     position: fixed;
     width: 100%;
@@ -139,6 +142,14 @@ html, body {
 }
 
 .map{
+	#pixelValue {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		z-index: 1000;
+		background: white;
+		padding: 1em;
+	}
 }
 
 #mapid {
@@ -202,5 +213,29 @@ html, body {
         padding: 1em;
         clear: left;
         text-align: center;
+    }
+}
+
+.homepage {
+    h1 {
+        text-align: left;
+    }
+    p {
+        text-align: left;
+    }
+    ul {
+        text-align: left;
+        padding-left: 0px;
+    }
+    footer {
+        padding: 1em;
+        clear: left;
+        text-align: center;
+    }
+    footer p{
+        text-align: center;
+    }
+    .sub-tree{
+        padding-left: 50px;
     }
 }
