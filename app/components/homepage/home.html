@@ -1,5 +1,34 @@
-<div class="jumbotron text-center">
-    <h1>Home Page</h1>
+<div flex class="homepage" layout="row">
+    <div flex="15"></div>
+    <div flex layout="column">
+        <h1><strong>Home</strong> </h1>
+        <p> Welcome to Unmanned Aerial System course 2017 project.</p>
+        <ul style="list-style-type:none">
+            <li><b>Map</b> menu:
+                <ul class="sub-tree">
+                    <li>See the excursion location "Aa River"</li>
+                    <li>Orthomosaic image</li>
+                    <li>NDVI Map</li>
+                    <li>Classification Map</li>
+                    <li>Digital Elevation Model</li>
+                </ul>
+            </li>
+            <li><b>Video</b> menu:
+                <ul class="sub-tree">
+                    <li>View the flight video and river's flow rates information</li>
+                </ul>
+            </li>
 
-    <p>{{ message }}</p>
+            <li><b>About</b> menu
+                <ul class="sub-tree">
+                    <li>Find our who are we and our project background</li>
+                </ul>
+            </li>
+        </ul>
+        <footer>
+            <a href="https://github.com/MojioMS/UAS_2017_WebGroup" title="View Source on GitHub"><img alt="View Source on GitHub" src="../app/components/assets/github-round.png" width="46" /></a> Visit us on Github
+            <p><br> Institute for Geoinformatics - The University of Muenster</p>
+        </footer>
+    </div>
+    <div flex="15"></div>
 </div>

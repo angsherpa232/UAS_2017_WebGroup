@@ -82,6 +82,9 @@
     width: 100%;
 }
 
+
+
+
 #main-toolbar {
     position: fixed;
     width: 100%;
@@ -142,6 +145,14 @@ html, body {
 }
 
 .map{
+    #pixelValue {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+        background: white;
+        padding: 1em;
+    }
 }
 
 #mapid {
@@ -211,8 +222,28 @@ html, body {
 .slider {
     position: absolute;
     bottom: 0;
-    left: 0;
-    padding-bottom: 12px;
-    padding-left: 24px;
-    padding-right: 24px;
+}
+
+.homepage {
+    h1 {
+        text-align: left;
+    }
+    p {
+        text-align: left;
+    }
+    ul {
+        text-align: left;
+        padding-left: 0px;
+    }
+    footer {
+        padding: 1em;
+        clear: left;
+        text-align: center;
+    }
+    footer p{
+        text-align: center;
+    }
+    .sub-tree{
+        padding-left: 50px;
+    }
 }

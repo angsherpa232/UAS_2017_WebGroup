@@ -2,6 +2,7 @@
     'use strict';
     function MainCtrl($scope, $timeout, $mdSidenav) {
 
+
         var imageLayer; //This is Jeison's repository if you are not me f*ck you
         var executed = false;
         var ctrl = new L.LayerGroup();
@@ -37,7 +38,26 @@
                 "Dark Map": dark,
                 "Light Map": light
             };
-            ctrl = L.control.layers(baseLayers).addTo(map);
+
+
+            var MosaicLayer = L.esri.tiledMapLayer({
+                url: "http://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/River_Aa_orthophoto/MapServer",
+                zIndex: 200
+            }).addTo(map);
+
+            var DSM = L.esri.tiledMapLayer({
+                url: "http://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/River_Aa_DSM/MapServer",
+                zIndex: 200
+            }).addTo(map);
+
+            var overlays = {
+                "Mosaic Layer": MosaicLayer,
+                "DSM Layer": DSM
+            };
+
+
+            ctrl = L.control.layers(baseLayers, overlays).addTo(map);
+
 
         }; //end of createMap Function
 
@@ -48,15 +68,15 @@
         };
 
         $scope.slider = {
-            value: 150,
+            value: 0,
             options: {
                 floor: 0,
-                ceil: 450
+                ceil: 50
             }
         };
-        $scope.sliderheight = 0;
         
-
+        $scope.sliderheight = 60;
+        
         $timeout(function () {
             window.dispatchEvent(new Event('resize'));
         },
