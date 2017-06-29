@@ -215,3 +215,27 @@ html, body {
         text-align: center;
     }
 }
+
+.homepage {
+    h1 {
+        text-align: left;
+    }
+    p {
+        text-align: left;
+    }
+    ul {
+        text-align: left;
+        padding-left: 0px;
+    }
+    footer {
+        padding: 1em;
+        clear: left;
+        text-align: center;
+    }
+    footer p{
+        text-align: center;
+    }
+    .sub-tree{
+        padding-left: 50px;
+    }
+}
