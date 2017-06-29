@@ -2,7 +2,7 @@
     'use strict';
     function MainCtrl($scope, $timeout, $mdSidenav) {
 
-		var imageLayer; //This is Jeison's repository if you are not me f*ck you
+		var imageLayer;
 		var executed = false;
 		var ctrl = new L.LayerGroup();
 		var map;

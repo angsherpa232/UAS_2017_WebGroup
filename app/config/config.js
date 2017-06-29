@@ -23,6 +23,11 @@
                     templateUrl: 'app/components/videopage/video.html',
                     authenticate: false
                 })
+            .state('3D', {
+                url: '/3D',
+                templateUrl: 'app/components/3D/3D.html',
+                authenticate: false
+            })
                 .state('about', {
                     url: '/about',
                     controller: 'AboutCtrl',
