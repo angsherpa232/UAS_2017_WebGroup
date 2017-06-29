@@ -50,14 +50,32 @@
                 zIndex: 200
             }).addTo(map);
 
+//592111	2327493
+//554271	2450917
+//607836	8283419
+//605632	7560675
+//599842	5691754
+//610445	5316151
+//530263	7777930
+//605673	5784182
+//664177	7750054
+
+            $scope.points = [
+                L.marker([51.945125, 7.571998]).bindPopup('Time: 0.5'),
+                L.marker([51.945135, 7.572260]).bindPopup('Time: 1.0'),
+                L.marker([51.945306, 7.572462]).bindPopup('Time: 1.5'),
+                L.marker([51.945230, 7.572771]).bindPopup('Time: 2.0')
+            ];
+            
+            var markers = L.layerGroup($scope.points);
+
             var overlays = {
                 "Mosaic Layer": MosaicLayer,
-                "DSM Layer": DSM
+                "DSM Layer": DSM,
+                markers
             };
 
-
             ctrl = L.control.layers(baseLayers, overlays).addTo(map);
-
 
         }; //end of createMap Function
 
@@ -71,12 +89,13 @@
             value: 0,
             options: {
                 floor: 0,
-                ceil: 50
+                ceil: 3
+                
             }
         };
-        
+
         $scope.sliderheight = 60;
-        
+
         $timeout(function () {
             window.dispatchEvent(new Event('resize'));
         },
