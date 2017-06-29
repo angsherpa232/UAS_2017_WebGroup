@@ -1,5 +1,10 @@
 <!-- Main HTML content -->
-<div class="map" layout="column">
+<div class="map" layout="column" flex>
     <!-- put leaflet inside 'nd stuff... -->
-    <div id="mapid" style="height: {{height}}px;"></div>
+    <div flex="90" id="mapid" style="height: {{height - sliderheight}}px;"></div>
+    <div class="slider" flex="10"  style="width: 100%;">
+            <rzslider
+                      rz-slider-model="slider.value"
+                      rz-slider-options="slider.options">        </rzslider>
+        </div>
 </div>

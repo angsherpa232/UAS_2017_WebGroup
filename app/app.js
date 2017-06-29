@@ -6,8 +6,7 @@
         'ngMaterial',
         'ngAnimate',
         'ngCookies',
-        'pascalprecht.translate',
-        'translations'])
+        'rzModule'])
             //.value("UASBaseUrl", "https://ad-boxx.de")
             .run(function($rootScope){
                 console.log("app started.");

@@ -81,6 +81,9 @@
   color: #1A80C1; }
 
 #mapid {
+  position: absolute;
+  top: 122;
+  left: 0;
   width: 100%; }
 
 #main-toolbar {
@@ -181,3 +184,11 @@ html, body {
   padding: 1em;
   clear: left;
   text-align: center; }
+
+.slider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding-bottom: 12px;
+  padding-left: 24px;
+  padding-right: 24px; }
