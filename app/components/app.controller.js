@@ -63,6 +63,11 @@
             $state.go('about', {
             });
         };
+
+        $scope.threed = function(){
+            $state.go('3D', {
+            });
+        };
     }
     ;
 
