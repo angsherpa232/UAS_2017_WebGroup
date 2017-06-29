@@ -37,20 +37,39 @@
 				"Dark Map": dark,
 				"Light Map": light
 			};
-			ctrl = L.control.layers(baseLayers).addTo(map);
+			
+					
+			var MosaicLayer = L.esri.tiledMapLayer({
+			    url: "http://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/River_Aa_orthophoto/MapServer",
+			    zIndex:200
+			}).addTo(map);
 
-		}; //end of createMap Function
-        
-		$scope.createMap();
-		
-		$scope.zoomRiver=function (){
-			map.setView([51.943703,7.573759], 16);
-		};
+			var DSM = L.esri.tiledMapLayer({
+			    url: "http://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/River_Aa_DSM/MapServer",
+			    zIndex:200
+			}).addTo(map);
 
-        $timeout(function () {
-                window.dispatchEvent(new Event('resize'));
-            },
-            200);
+			var overlays = {
+				"Mosaic Layer": MosaicLayer,
+				"DSM Layer": DSM
+			};
+
+
+			ctrl = L.control.layers(baseLayers, overlays).addTo(map);
+		    
+
+			}; //end of createMap Function
+
+			$scope.createMap();
+			
+			$scope.zoomRiver=function (){
+				map.setView([51.943703,7.573759], 16);
+			};
+
+	        $timeout(function () {
+	                window.dispatchEvent(new Event('resize'));
+	            },
+	            200);
     }
     ;
     angular.module('UASWebApp')
