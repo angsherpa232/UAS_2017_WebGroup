@@ -1,9 +1,9 @@
 <!-- Main HTML content -->
-<div class="map" layout="column" flex>
+<div layout="column" flex>
     <!-- put leaflet inside 'nd stuff... -->
-    <div flex="90" id="mapid" style="height: {{height - sliderheight}}px;"></div>
-    <div class="slider" flex="10"  style="width: 100%;">
-            <rzslider
+    <div id="mapid" style="height: {{height}}px;"></div>
+    <div ng-show="my.slidershow" class="slider">
+            <rzslider 
                       rz-slider-model="slider.value"
                       rz-slider-options="slider.options">        </rzslider>
         </div>
