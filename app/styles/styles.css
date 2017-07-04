@@ -136,6 +136,40 @@ html, body {
   background: white;
   padding: 1em; }
 
+.map .DEM-legend {
+  padding: 0.6vw 0.8vw;
+  background-color: #FFFFFF;
+  width: 11.5em;
+  max-height: 16.5em;
+  line-height: 1.75em;
+  color: #555;
+  margin-right: 0.8vw;
+  opacity: 0.9;
+  box-shadow: 0 0 1.5vw rgba(0, 0, 0, 0.2);
+  border-radius: 0.5em; }
+
+.map .dem-rainbow {
+  height: 20px;
+  background: linear-gradient(to right, #ffffff 0%, #000000 100%);
+  border: solid 1px #c7c7c7;
+  /*polygon-fill: #E7E1EF;
+        polygon-opacity: 0.8;
+        line-color: #FFF;
+        line-width: 0.5;
+        line-opacity: 1;*/ }
+
+.map .center-button {
+  padding: 0.6vw 0.8vw;
+  background-color: #FFFFFF;
+  width: 24px;
+  height: 24px;
+  /* line-height: 1.75em; */
+  color: #555;
+  /* margin-right: 0.8vw; */
+  opacity: 0.9;
+  box-shadow: 0 0 1.5vw rgba(0, 0, 0, 0.2);
+  border-radius: 0.5em; }
+
 #mapid {
   width: 100%;
   height: 90%;
