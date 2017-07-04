@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    function MainCtrl($scope, $timeout, $mdSidenav) {
+    function MainCtrl($scope, $compile, $timeout) {
 
         var imageLayer;
         var executed = false;
@@ -90,12 +90,15 @@
             legendCenterButton.onAdd = function () {
                 var div = L.DomUtil.create('center', 'center-button');
 
-                var zooming = '<md-button ng-click="zoomRiver()">';
+                var zooming = '<span ng-click="zoomRiver()">';
                 zooming += '<img style="width: 24px; height: 24px;" src="app/components/assets/button_icons/meeting-point-32.png"/>';
-                zooming += '</md-button>';
+                zooming += '</span>';
                 div.innerHTML = zooming;
 
-                return div;
+                var linkFunction = $compile(angular.element(div));
+                var newScope = $scope.$new();
+
+                return linkFunction(newScope)[0];
             };
             legendCenterButton.addTo(map); //Added by default
             /*End Zoom button*/
@@ -136,6 +139,7 @@
                 window.dispatchEvent(new Event('resize'));
             },
             200);
+
     };
     angular.module('UASWebApp')
         .controller('MainCtrl', MainCtrl)
