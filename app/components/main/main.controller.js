@@ -46,7 +46,7 @@
             var MosaicLayer = L.esri.tiledMapLayer({
                 url: "http://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/River_Aa_orthophoto/MapServer",
                 zIndex: 200
-            }).addTo(map);
+            });
 
             var DSM = L.esri.tiledMapLayer({
                 url: "http://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/River_Aa_DSM/MapServer",
