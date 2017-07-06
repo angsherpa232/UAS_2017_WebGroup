@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function AppCtrl($rootScope, $state, $scope, $mdMedia, $window) {
+    function AppCtrl($state, $scope, $mdMedia) {
         $scope.message = 'Initial Setup';
         $scope.screenIsXS = $mdMedia('xs');
         $scope.screenIsSM = $mdMedia('sm');
@@ -35,14 +35,6 @@
             console.log("screen is gt-MD:" + size);
             $scope.screenIsGTMD = size;
         });
-        
-        angular.element($window).bind('resize', function () {
-                        $scope.$apply(function () {
-                            $scope.width = $window.innerWidth;
-                            $scope.height = $window.innerHeight - 62;
-                            console.log($scope.height);
-                        });
-                    });
         
         $scope.home = function(){
             $state.go('home', {

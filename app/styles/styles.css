@@ -81,6 +81,9 @@
   color: #1A80C1; }
 
 #mapid {
+  position: absolute;
+  top: 60px;
+  left: 0;
   width: 100%; }
 
 #main-toolbar {
@@ -223,6 +226,13 @@ html, body {
   padding: 1em;
   clear: left;
   text-align: center; }
+
+.slider {
+  position: absolute;
+  bottom: 0;
+  padding-left: 5%;
+  padding-right: 5%;
+  width: 90%; }
 
 .homepage h1 {
   text-align: left; }
