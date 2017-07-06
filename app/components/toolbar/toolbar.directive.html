@@ -8,8 +8,11 @@
         <img class="logo-icon" src="app/components/assets/logo_white.png">
 
         <span flex class="flex">
-            <span class="toolbar-title">
-                UAaS - Unmanned Aerial Systems
+            <span ng-hide="screenIsXS" class="toolbar-title">
+                UAaS - Unmanned Aa Aerial Systems
+            </span>
+            <span ng-hide="!screenIsXS" class="toolbar-title">
+                UAaS
             </span>
         </span>
 
