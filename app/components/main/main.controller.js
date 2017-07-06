@@ -1,6 +1,7 @@
 (function () {
     'use strict';
-    function MainCtrl($rootScope, $scope, $timeout) {
+  
+    function MainCtrl($rootScope, $scope, $timeout, $compile) {
 
         var imageLayer;
         var executed = false;
@@ -10,45 +11,6 @@
         $rootScope.sliderheight = 0;
         $scope.numberPoints = 0;
 
-        $scope.onOverlayAdd = function (e) {
-            console.log(e);
-            if (e.name === "floating experiment") {
-                // 1. add all markers
-                $scope.loadMarkers();
-
-                // 2. make slider available
-                $scope.my.slidershow = true;
-
-                // 3. change size of map
-                $rootScope.sliderheight = 60;
-
-                // 4. update window:
-                $timeout(function () {
-                    window.dispatchEvent(new Event('resize'));
-                },
-                        200);
-            }
-        };
-        $scope.onOverlayRemove = function (e) {
-            console.log(e);
-            if (e.name === "floating experiment") {
-                // 1. remove all markers
-                $scope.unloadMarkers();
-
-                // 2. make slider unavailable
-                $scope.my.slidershow = false;
-
-                // 3. change size of map
-                $rootScope.sliderheight = 0;
-
-                // 4. update window:
-                $timeout(function () {
-                    window.dispatchEvent(new Event('resize'));
-                },
-                        200);
-            }
-        };
-
         $scope.createMap = function () {
 
             var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -57,12 +19,13 @@
                     mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibmdhdmlzaCIsImEiOiJjaXFheHJmc2YwMDdoaHNrcWM4Yjhsa2twIn0.8i1Xxwd1XifUU98dGE9nsQ';
 
             var grayscale = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
-                    streets = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr}),
-                    outdoors = L.tileLayer(mbUrl, {id: 'mapbox.outdoors', attribution: mbAttr}),
-                    satellite = L.tileLayer(mbUrl, {id: 'mapbox.satellite', attribution: mbAttr}),
-                    dark = L.tileLayer(mbUrl, {id: 'mapbox.dark', attribution: mbAttr}),
-                    light = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
-                    satellitestreets = L.tileLayer(mbUrl, {id: 'mapbox.streets-satellite', attribution: mbAttr});
+                streets = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr}),
+                outdoors = L.tileLayer(mbUrl, {id: 'mapbox.outdoors', attribution: mbAttr}),
+                satellite = L.tileLayer(mbUrl, {id: 'mapbox.satellite', attribution: mbAttr}),
+                dark = L.tileLayer(mbUrl, {id: 'mapbox.dark', attribution: mbAttr}),
+                light = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
+                satellitestreets = L.tileLayer(mbUrl, {id: 'mapbox.streets-satellite', attribution: mbAttr});
+
 
             map = L.map('mapid', {
                 center: [51.943703, 7.573759], /*Default location */
@@ -89,6 +52,53 @@
                 url: "http://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/River_Aa_DSM/MapServer",
                 zIndex: 200
             }).addTo(map);
+
+
+            /*DEM Legend*/
+            var legendDEM = L.control({position: 'bottomright'});
+            legendDEM.onAdd = function () {
+                var div = L.DomUtil.create('DEM', 'DEM-legend');
+
+                div.innerHTML = '<b>DEM Scale</b> <br>';
+                var valuesTable = '<div class="">';
+                valuesTable +=    '<table style=\"width: 100%;\">';
+                valuesTable +=        '<tr>';
+                valuesTable +=            '<td style=\"text-align: left;\">';
+                valuesTable +=                '<span>0</span>';
+                valuesTable +=            '</td>';
+                valuesTable +=            '<td style=\"text-align: right;\">';
+                valuesTable +=                '<span>17</span>';
+                valuesTable +=            '</td>';
+                valuesTable +=        '</tr>';
+                valuesTable +=    '</table>';
+                valuesTable += '</div>';
+
+                div.innerHTML += valuesTable;
+                div.innerHTML += '<div class="dem-rainbow"></div>';
+
+
+                return div;
+            };
+            legendDEM.addTo(map); //Added by default
+            /*End DEM Legend*/
+            
+             /*Zoom button*/
+            var legendCenterButton = L.control({position: 'bottomright'});
+            legendCenterButton.onAdd = function () {
+                var div = L.DomUtil.create('center', 'center-button');
+
+                var zooming = '<span ng-click="zoomRiver()">';
+                zooming += '<img style="width: 24px; height: 24px;" src="app/components/assets/button_icons/meeting-point-32.png"/>';
+                zooming += '</span>';
+                div.innerHTML = zooming;
+
+                var linkFunction = $compile(angular.element(div));
+                var newScope = $scope.$new();
+
+                return linkFunction(newScope)[0];
+            };
+            legendCenterButton.addTo(map); //Added by default
+            /*End Zoom button*/
 
             // all available markers
             $scope.markerpts = [
@@ -152,6 +162,61 @@
             $scope.showMarkers();
             $scope.unloadMarkers();
 
+            $scope.onOverlayAdd = function (e) {
+                console.log(e);
+                if (e.name === 'DSM Layer') {
+                    map.removeControl(legendDEM);
+                    legendDEM.addTo(map);
+                }
+                if (e.name === "floating experiment") {
+                    // 1. add all markers
+                    $scope.loadMarkers();
+
+                    // 2. make slider available
+                    $scope.my.slidershow = true;
+
+                    // 3. change size of map
+                    $rootScope.sliderheight = 60;
+
+
+
+                }
+                map.removeControl(legendCenterButton);
+                legendCenterButton.addTo(map);
+                // 4. update window:
+                $timeout(function () {
+                    window.dispatchEvent(new Event('resize'));
+                },
+                        200);
+
+            };
+            $scope.onOverlayRemove = function (e) {
+                console.log(e);
+                if (e.name === "floating experiment") {
+                    // 1. remove all markers
+                    $scope.unloadMarkers();
+
+                    // 2. make slider unavailable
+                    $scope.my.slidershow = false;
+
+                    // 3. change size of map
+                    $rootScope.sliderheight = 0;
+
+
+                }
+                if (e.name === 'DSM Layer') {
+                    map.removeControl(legendDEM);
+                }
+
+                map.removeControl(legendCenterButton);
+                legendCenterButton.addTo(map);
+                // 4. update window:
+                $timeout(function () {
+                    window.dispatchEvent(new Event('resize'));
+                },
+                        200);
+            };
+            
             map.on('overlayadd', $scope.onOverlayAdd);
             map.on('overlayremove', $scope.onOverlayRemove);
 
