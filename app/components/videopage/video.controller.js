@@ -9,19 +9,14 @@
         $scope.play = false;
         $scope.UAVVideos = [
             {
-                Video: '../assets/videos/UAV_Video_2.mp4',
-                Description: 'This is mp4 Video',
-                Info: 'date, place and by whom'
+                Video: '/app/components/assets/videos/UAV_Video_1.mp4',
+                Description: 'Object (Float) detection to Measure stream velocity using UAV and OpenCV',
+                Info: 'June 2017,Aa river,Muenster Germany'
             },
             {
-                Video: 'http://images.all-free-download.com/footage_preview/webm/horse_riding_205.webm',
-                Description: 'This is the first web video',
-                Info: 'date, place and by whom'
-            },
-            {
-                Video: 'http://images.all-free-download.com/footage_preview/webm/flower_124.webm',
-                Description: 'This is the second web video',
-                Info: 'date, place and by whom'
+                Video: '/app/components/assets/videos/UAV_Video_2.mp4',
+                Description: 'Stabilized Video obtained from UAV for velocity determination of stream using OpenCV',
+                Info: 'June 2017,Aa river,Muenster Germany'
             }
         ]
 
