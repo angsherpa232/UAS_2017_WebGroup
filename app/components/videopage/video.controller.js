@@ -9,7 +9,7 @@
         $scope.play = false;
         $scope.UAVVideos = [
             {
-                Video: 'http://techslides.com/demos/sample-videos/small.mp4',
+                Video: '../assets/videos/UAV_Video_2.mp4',
                 Description: 'This is mp4 Video',
                 Info: 'date, place and by whom'
             },
