@@ -1,4 +1,4 @@
-(function () {
+(function () { // video controller page
     'use strict';
 
     function VideoCtrl($scope) {
@@ -6,8 +6,8 @@
         console.log('VideoCtrl started.');
         $scope.title = 'UAS Webapp';
 
-        $scope.play = false;
-        $scope.UAVVideos = [
+        $scope.play = false;//variable to avoid videos auto play
+        $scope.UAVVideos = [ //  array of videos  with its three attributes
             {
                 Video: '/app/components/assets/videos/UAV_Video_1.mp4',
                 Description: 'Object (Float) detection to Measure stream velocity using UAV and OpenCV',
@@ -21,7 +21,7 @@
         ]
 
 
-        $scope.currentVideo = function (index) {
+        $scope.currentVideo = function (index) {//get unique index then help to play the video after the user clicks
             $scope.play = true;
             $scope.current_video = $scope.UAVVideos[index];
         }
@@ -36,9 +36,9 @@
     };
 
 
-    angular.module('UASWebApp')
-        .controller('VideoCtrl', VideoCtrl)
-        .filter("trustUrl", ['$sce',
+    angular.module('UASWebApp')//the name of the angular application
+        .controller('VideoCtrl', VideoCtrl)//the name of the controller found in video.html
+        .filter("trustUrl", ['$sce',//helps to filter the url videos to check the integrity
             function ($sce) {
                 return function (recordingUrl) {
                     return $sce.trustAsResourceUrl(recordingUrl);
