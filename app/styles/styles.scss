@@ -253,9 +253,9 @@ html, body {
 .slider {
     position: absolute;
     bottom: 0;
-    padding-left: 5%;
-    padding-right: 5%;
-    width: 90%;
+    padding-left: 24px;
+    padding-right: 24px;
+    width:100%;
 }
 
 .homepage {
@@ -280,4 +280,13 @@ html, body {
     .sub-tree{
         padding-left: 50px;
     }
+}
+
+.md-select-menu-container {
+    z-index: 1005;
+}
+
+.videospeed {
+    margin-top: 8px;
+    margin-bottom: 8px;
 }

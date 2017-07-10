@@ -2,9 +2,25 @@
 <div layout="column" flex>
     <!-- put leaflet inside 'nd stuff... -->
     <div id="mapid" style="height: {{height}}px;"></div>
-    <div ng-show="my.slidershow" class="slider">
-            <rzslider 
-                      rz-slider-model="slider.value"
-                      rz-slider-options="slider.options">        </rzslider>
-        </div>
+    <div ng-show="my.slidershow" class="slider" layout="row">
+        data:
+        <md-select ng-model="selectedFloatingData" placeholder="s 1" class="md-no-underline videospeed" ng-change="vidDataChanged()">
+            <md-option value="0">straight 1</md-option>
+            <md-option value="1">straight 2</md-option>
+            <md-option value="2">straight 3</md-option>
+        </md-select>
+        <md-button class="md-primary md-raised" ng-if="!playPressed" ng-click="playSlider()">PLAY</md-button>
+        <md-button class="md-primary md-raised" ng-if="playPressed" ng-click="playSlider()">PAUSE</md-button>
+        <md-select ng-model="videoSpeed" placeholder="1 x" class="md-no-underline videospeed" ng-change="vidSpeedChanged()">
+            <md-option value="0.125">8 x</md-option> <!-- value = 1 / option -->
+            <md-option value="0.25">4 x</md-option>
+            <md-option value="0.5">2 x</md-option>
+            <md-option md-selected value="1">1 x</md-option>
+            <md-option value="2">0.5x</md-option>
+            <md-option value="4">0.25x</md-option>
+        </md-select>
+        <rzslider flex
+            rz-slider-model="slider.value" 
+            rz-slider-options="slider.options"></rzslider>
+    </div>
 </div>
