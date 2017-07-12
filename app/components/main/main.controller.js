@@ -310,6 +310,9 @@
             $scope.onOverlayRemove = function (e) {
                 console.log(e);
                 if (e.name === "Floating Points") {
+                    // stop autoplay:
+                    $scope.playPressed= false;
+                    
                     // 1. remove all markers
                     $scope.unloadMarkers();
 
@@ -339,6 +342,8 @@
 
         }; //end of createMap Function
 
+        $scope.timeInterval = 20; // 20ms for data rows 0 - 699; rest 40ms.
+        
         function forwardSlider() {
             setTimeout(function () {
                 var current = $scope.slider.value + 1;
@@ -358,8 +363,11 @@
                 }
                 // update selection in slider:
                 window.dispatchEvent(new Event('resize'));
-            }, 20 * $scope.videoSpeed);// milliseconds timeout before show next:
-        }
+                if (current === 700)
+                    $scope.timeInterval = 40;
+                console.log($scope.timeInterval*$scope.videoSpeed);
+            }, $scope.timeInterval * $scope.videoSpeed);// milliseconds timeout before show next:
+        };
 
         $scope.playPressed = false;
         $scope.videoSpeed = 1;

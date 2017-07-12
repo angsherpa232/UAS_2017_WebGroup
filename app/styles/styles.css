@@ -229,6 +229,8 @@ html, body {
   padding-left: 24px;
   padding-right: 24px;
   width: 100%; }
+  .slider .rz-pointer {
+    background-color: #0d6af0; }
 
 .homepage h1 {
   text-align: left; }
@@ -257,3 +259,5 @@ html, body {
 .videospeed {
   margin-top: 8px;
   margin-bottom: 8px; }
+  .videospeed .md-select-value {
+    min-width: 0px; }

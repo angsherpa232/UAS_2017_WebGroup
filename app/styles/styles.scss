@@ -256,6 +256,9 @@ html, body {
     padding-left: 24px;
     padding-right: 24px;
     width:100%;
+    .rz-pointer{
+        background-color: #0d6af0;
+    }
 }
 
 .homepage {
@@ -289,4 +292,7 @@ html, body {
 .videospeed {
     margin-top: 8px;
     margin-bottom: 8px;
+    .md-select-value {
+        min-width: 0px;
+    }
 }

@@ -3,14 +3,18 @@
     <!-- put leaflet inside 'nd stuff... -->
     <div id="mapid" style="height: {{height}}px;"></div>
     <div ng-show="my.slidershow" class="slider" layout="row">
-        data:
-        <md-select ng-model="selectedFloatingData" placeholder="s 1" class="md-no-underline videospeed" ng-change="vidDataChanged()">
-            <md-option value="0">straight 1</md-option>
-            <md-option value="1">straight 2</md-option>
-            <md-option value="2">straight 3</md-option>
+        <p ng-if="!screenIsXS">dataset:</p>
+        <md-select ng-model="selectedFloatingData" placeholder="1" class="md-no-underline videospeed" ng-change="vidDataChanged()">
+            <md-option value="0">1</md-option>
+            <md-option value="1">2</md-option>
+            <md-option value="2">3</md-option>
         </md-select>
-        <md-button class="md-primary md-raised" ng-if="!playPressed" ng-click="playSlider()">PLAY</md-button>
-        <md-button class="md-primary md-raised" ng-if="playPressed" ng-click="playSlider()">PAUSE</md-button>
+        <md-button class="md-primary md-raised" ng-if="!playPressed && !screenIsXS" ng-click="playSlider()">PLAY</md-button>
+        <md-button class="md-primary md-raised" ng-if="playPressed && !screenIsXS" ng-click="playSlider()">PAUSE</md-button>
+        <md-button class="md-primary md-raised" ng-if="!playPressed && screenIsXS" ng-click="playSlider()" style="min-width: 0px;">
+            <i class="material-icons">play_circle_filled</i></md-button>
+        <md-button class="md-primary md-raised" ng-if="playPressed && screenIsXS" ng-click="playSlider()" style="min-width: 0px;">
+            <i class="material-icons">pause_circle_filled</i></md-button>
         <md-select ng-model="videoSpeed" placeholder="1 x" class="md-no-underline videospeed" ng-change="vidSpeedChanged()">
             <md-option value="0.125">8 x</md-option> <!-- value = 1 / option -->
             <md-option value="0.25">4 x</md-option>
