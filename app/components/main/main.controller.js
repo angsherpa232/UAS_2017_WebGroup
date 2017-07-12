@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-  
+
     function MainCtrl($rootScope, $scope, $timeout, $compile) {
 
         var imageLayer;
@@ -44,19 +44,21 @@
                     'Imagery © <a href="http://mapbox.com">Mapbox</a>',
                     mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibmdhdmlzaCIsImEiOiJjaXFheHJmc2YwMDdoaHNrcWM4Yjhsa2twIn0.8i1Xxwd1XifUU98dGE9nsQ';
 
-            var grayscale = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
-                streets = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr}),
-                outdoors = L.tileLayer(mbUrl, {id: 'mapbox.outdoors', attribution: mbAttr}),
-                satellite = L.tileLayer(mbUrl, {id: 'mapbox.satellite', attribution: mbAttr}),
-                dark = L.tileLayer(mbUrl, {id: 'mapbox.dark', attribution: mbAttr}),
-                light = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
-                satellitestreets = L.tileLayer(mbUrl, {id: 'mapbox.streets-satellite', attribution: mbAttr});
+            var grayscale = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18}),
+                    streets = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18}),
+                    outdoors = L.tileLayer(mbUrl, {id: 'mapbox.outdoors', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18}),
+                    satellite = L.tileLayer(mbUrl, {id: 'mapbox.satellite', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18}),
+                    dark = L.tileLayer(mbUrl, {id: 'mapbox.dark', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18}),
+                    light = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18}),
+                    satellitestreets = L.tileLayer(mbUrl, {id: 'mapbox.streets-satellite', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18});
 
 
             map = L.map('mapid', {
                 center: [51.943703, 7.573759], /*Default location */
                 zoom: 16, /*Default Zoom, Higher = Closer) */
-                layers: [satellite] // Default basemaplayer on startrup, can also give another layer here to show by default)
+                layers: [satellite], // Default basemaplayer on startrup, can also give another layer here to show by default)
+                maxZoom: 22,
+                maxNativeZoom: 18
             });
 
             var baseLayers = {
@@ -71,12 +73,16 @@
 
             var MosaicLayer = L.esri.tiledMapLayer({
                 url: "http://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/River_Aa_orthophoto/MapServer",
-                zIndex: 200
+                zIndex: 200,
+                maxZoom: 22,
+                maxNativeZoom: 18
             });
 
             var DSM = L.esri.tiledMapLayer({
                 url: "http://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/River_Aa_DSM/MapServer",
-                zIndex: 200
+                zIndex: 200,
+                maxZoom: 22,
+                maxNativeZoom: 18
             }).addTo(map);
 
             $scope.flightPlanOnEachFeature = function (feature,layer) {
@@ -110,6 +116,7 @@
 
             var descriptionBox = L.control({position: 'bottomleft'});
             var legendDEM = L.control({position: 'bottomright'});
+
             var legendCenterButton = L.control({position: 'bottomright'});
             var flightPlanLegend = L.control({position: 'bottomright'});
 
@@ -282,49 +289,134 @@
 
             // all available markers
             $scope.markerpts = [
+                [], //straight 1
+                [], //straight 2
+                [] // straight 3
             ];
 
-            $scope.markerpts[0] = new L.marker([51.945125, 7.571998]).bindPopup('Time: 0.5');
-            $scope.markerpts[1] = new L.marker([51.945135, 7.572260]).bindPopup('Time: 1.0');
-            $scope.markerpts[2] = new L.marker([51.945306, 7.572462]).bindPopup('Time: 1.5');
-            $scope.markerpts[3] = new L.marker([51.945321, 7.572707]).bindPopup('Time: 2.0');
-            $scope.markerpts[4] = new L.marker([51.945230, 7.572771]).bindPopup('Time: 2.4');
-            $scope.markerpts[5] = new L.marker([51.945300, 7.572744]).bindPopup('Time: 2.7');
-            $scope.markerpts[6] = new L.marker([51.945180, 7.572772]).bindPopup('Time: 3.6');
-            $scope.markerpts[7] = new L.marker([51.945023, 7.572755]).bindPopup('Time: 4.8');
-            $scope.numberPoints = $scope.markerpts.length - 1;
+            // set of markers of current selected floating experiment
+            $scope.selectedMarkers = [
+
+            ];
+
+            // load csv data for floating pts:
+            $scope.dataAll = [];
+            $scope.data;
+            $scope.markerdata = [];
+            $.ajax({
+                url: "app/components/assets/floating/straight1.csv",
+                async: false,
+                success: function (csvd) {
+                    $scope.data = $.csv.toArrays(csvd);
+                },
+                dataType: "text",
+                complete: function () {
+                    // call a function on complete 
+                    for (var i = 0; i < $scope.data.length; i++) {
+                        var partsOfStr = $scope.data[i][0].split(';');
+                        var obj = {
+                            lng: partsOfStr[0],
+                            lat: partsOfStr[1],
+                            time: partsOfStr[2],
+                        };
+                        $scope.markerdata.push(obj);
+                        $scope.markerpts[0][i] = new L.marker(
+                                [obj.lng, obj.lat]
+                                ).bindPopup('Time: ' + obj.time);
+                    }
+                    $scope.dataAll.push($scope.markerdata);
+                    $scope.markerdata = [];
+                    $.ajax({
+                        url: "app/components/assets/floating/straight2.csv",
+                        async: false,
+                        success: function (csvd) {
+                            $scope.data = $.csv.toArrays(csvd);
+                        },
+                        dataType: "text",
+                        complete: function () {
+                            // call a function on complete 
+                            for (var i = 0; i < $scope.data.length; i++) {
+                                var partsOfStr = $scope.data[i][0].split(';');
+                                var obj = {
+                                    lng: partsOfStr[0],
+                                    lat: partsOfStr[1],
+                                    time: partsOfStr[2],
+                                };
+                                $scope.markerdata.push(obj);
+                                $scope.markerpts[1][i] = new L.marker(
+                                        [obj.lng, obj.lat]
+                                        ).bindPopup('Time: ' + obj.time);
+                            }
+                            $scope.dataAll.push($scope.markerdata);
+                            $scope.markerdata = [];
+                            $.ajax({
+                                url: "app/components/assets/floating/straight3.csv",
+                                async: false,
+                                success: function (csvd) {
+                                    $scope.data = $.csv.toArrays(csvd);
+                                },
+                                dataType: "text",
+                                complete: function () {
+                                    // call a function on complete 
+                                    for (var i = 0; i < $scope.data.length; i++) {
+                                        var partsOfStr = $scope.data[i][0].split(';');
+                                        var obj = {
+                                            lng: partsOfStr[0],
+                                            lat: partsOfStr[1],
+                                            time: partsOfStr[2],
+                                        };
+                                        $scope.markerdata.push(obj);
+                                        $scope.markerpts[2][i] = new L.marker(
+                                                [obj.lng, obj.lat]
+                                                ).bindPopup('Time: ' + obj.time);
+                                    }
+                                    $scope.dataAll.push($scope.markerdata);
+                                    $scope.markerdata = [];
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+            $scope.numberPoints = $scope.markerpts[$scope.selectedFloatingData].length - 1;
 
             // those markers, being currently on map:
             $scope.addedMarkers = {};
-            for (var i = 0; i <= $scope.markerpts.length; i++)
+            for (var i = 0; i <= $scope.markerpts[$scope.selectedFloatingData].length; i++)
                 $scope.addedMarkers[i] = false;
 
             $scope.slider.value = 0;
 
             $scope.showMarkers = function () {
-                for (var i = 0; i <= $scope.slider.value; i++) {
-                    $scope.markerpts[i].addTo(map);
-                    $scope.addedMarkers[i] = true;
-                }
-                for (var i = $scope.slider.value + 1; i <= $scope.markerpts.length; i++) {
-                    if ($scope.addedMarkers[i]) {
-                        $scope.markerpts[i].remove(map);
-                        $scope.addedMarkers[i] = false;
+                var i = $scope.slider.value;
+                // add current marker:
+                $scope.markerpts[$scope.selectedFloatingData][i].addTo(map);
+                $scope.addedMarkers[i] = true;
+                // remove previous marker:
+                for (var j = 0; j < i; j++)
+                    if ($scope.addedMarkers[j]) {
+                        $scope.markerpts[$scope.selectedFloatingData][j].remove(map);
+                        $scope.addedMarkers[j] = false;
                     }
-                }
+                for (var j = i + 1; j <= $scope.numberPoints; j++)
+                    if ($scope.addedMarkers[j]) {
+                        $scope.markerpts[$scope.selectedFloatingData][j].remove(map);
+                        $scope.addedMarkers[j] = false;
+                    }
             };
 
             $scope.unloadMarkers = function () {
-                for (var i = 0; i <= $scope.markerpts.length; i++) {
+                for (var i = 0; i <= $scope.markerpts[$scope.selectedFloatingData].length; i++) {
                     if ($scope.addedMarkers[i])
-                        $scope.markerpts[i].remove(map);
+                        $scope.markerpts[$scope.selectedFloatingData][i].remove(map);
                 }
                 ;
             };
             $scope.loadMarkers = function () {
-                for (var i = 0; i <= $scope.markerpts.length; i++) {
+                for (var i = 0; i <= $scope.markerpts[$scope.selectedFloatingData].length; i++) {
                     if ($scope.addedMarkers[i])
-                        $scope.markerpts[i].addTo(map);
+                        $scope.markerpts[$scope.selectedFloatingData][i].addTo(map);
                 }
                 ;
             };
@@ -334,9 +426,9 @@
             $scope.overlays = {
                 "Mosaic Layer": MosaicLayer,
                 "DSM Layer": DSM,
-                "Floating Points Layer": markersDummyLayer,
+                "Floating Points Layer": markersDummyLayer
                 "Flight Plan Layer": flightPlanLayer
-            }
+            };
 
 
             $scope.ctrl = L.control.layers(baseLayers, $scope.overlays);
@@ -373,6 +465,34 @@
                 if (e.name === "Flight Plan Layer") {
                     $("#FlightPlan").css("display","");
                     flightPlanLegend.addTo(map);
+                    // 4. change viewport to current selected Experiment
+                    $scope.playPressed = false;
+                    // 1. unload previous markers
+                    for (var i = 0; i <= $scope.markerpts[$scope.previousSelectedFloatingData].length; i++) {
+                        if ($scope.addedMarkers[i]) {
+                            $scope.markerpts[$scope.previousSelectedFloatingData][i].remove(map);
+                            $scope.addedMarkers[i] = false;
+                        }
+                    }
+                    // 2. load current markers
+                    $scope.addedMarkers[0] = true; // run from start
+                    for (var i = 0; i <= $scope.markerpts[$scope.selectedFloatingData].length; i++) {
+                        if ($scope.addedMarkers[i]) {
+                            $scope.markerpts[$scope.selectedFloatingData][i].addTo(map);
+                        }
+                    }
+                    // 3. reload slider data
+                    $scope.slider.value = 0;
+                    // 4. zoom to map excerpt of selected experiment:
+                    map.setView($scope.centerExperiments[$scope.selectedFloatingData], 21);
+
+                    $timeout(function () {
+                        window.dispatchEvent(new Event('resize'));
+                    },
+                            200);
+
+                    $scope.previousSelectedFloatingData = $scope.selectedFloatingData;
+
                 }
 
                 map.removeControl(legendCenterButton);
@@ -404,6 +524,9 @@
                     $("#DSM").css("display","none");
                 }
                 if (e.name === "Floating Points Layer") {
+                    // stop autoplay:
+                    $scope.playPressed= false;
+                    
                     // 1. remove all markers
                     $scope.unloadMarkers();
 
@@ -434,14 +557,98 @@
                 },
                         200);
             };
-            
+
             map.on('overlayadd', $scope.onOverlayAdd);
             map.on('overlayremove', $scope.onOverlayRemove);
 
-
         }; //end of createMap Function
 
-        $scope.slider ={value:0};
+        $scope.timeInterval = 20; // 20ms for data rows 0 - 699; rest 40ms.
+        
+        function forwardSlider() {
+            setTimeout(function () {
+                var current = $scope.slider.value + 1;
+                // recursion end?
+                if ($scope.playPressed & (current < $scope.markerpts[$scope.selectedFloatingData].length)) {
+                    // go next marker
+                    $scope.slider.value = current;
+                    $scope.markerpts[$scope.selectedFloatingData][current].addTo(map);
+                    $scope.addedMarkers[current] = true;
+                    // remove previous marker
+                    $scope.markerpts[$scope.selectedFloatingData][current - 1].remove(map);
+                    $scope.addedMarkers[current - 1] = false;
+                    // recursive op:
+                    forwardSlider();
+                } else {
+                    $scope.playPressed = false;
+                }
+                // update selection in slider:
+                window.dispatchEvent(new Event('resize'));
+                if (current === 700)
+                    $scope.timeInterval = 40;
+                console.log($scope.timeInterval*$scope.videoSpeed);
+            }, $scope.timeInterval * $scope.videoSpeed);// milliseconds timeout before show next:
+        };
+
+        $scope.playPressed = false;
+        $scope.videoSpeed = 1;
+
+        $scope.playSlider = function () {
+            $scope.playPressed = !$scope.playPressed;
+            if ($scope.playPressed) {
+                if ($scope.slider.value >= $scope.numberPoints) {
+                    $scope.slider.value = 0;
+                    // undo markers:
+                    for (var i = 1; i <= $scope.markerpts[$scope.selectedFloatingData].length; i++)
+                        if ($scope.addedMarkers[i]) {
+                            $scope.addedMarkers[i] = false;
+                            $scope.markerpts[$scope.selectedFloatingData][i].remove(map);
+                        }
+                }
+                forwardSlider();
+            }
+        };
+
+        $scope.previousSelectedFloatingData = 0;
+        $scope.selectedFloatingData = 0;
+        $scope.centerExperiments = [
+            [51.944671, 7.573111],
+            [51.944698, 7.573128],
+            [51.944716, 7.573150]
+        ];
+        $scope.vidDataChanged = function () {
+            console.log($scope.selectedFloatingData);
+            if ($scope.previousSelectedFloatingData !== $scope.selectedFloatingData) {
+                $scope.playPressed = false;
+                // 1. unload previous markers
+                for (var i = 0; i <= $scope.markerpts[$scope.previousSelectedFloatingData].length; i++) {
+                    if ($scope.addedMarkers[i]) {
+                        $scope.markerpts[$scope.previousSelectedFloatingData][i].remove(map);
+                        $scope.addedMarkers[i] = false;
+                    }
+                }
+                // 2. load current markers
+                $scope.addedMarkers[0] = true; // run from start
+                for (var i = 0; i <= $scope.markerpts[$scope.selectedFloatingData].length; i++) {
+                    if ($scope.addedMarkers[i]) {
+                        $scope.markerpts[$scope.selectedFloatingData][i].addTo(map);
+                    }
+                }
+                // 3. reload slider data
+                $scope.slider.value = 0;
+                // 4. zoom to map excerpt of selected experiment:
+                map.setView($scope.centerExperiments[$scope.selectedFloatingData], 21);
+
+                $timeout(function () {
+                    window.dispatchEvent(new Event('resize'));
+                },
+                        200);
+
+                $scope.previousSelectedFloatingData = $scope.selectedFloatingData;
+            }
+        };
+
+        $scope.slider = {value: 0};
 
         $scope.createMap();
 
