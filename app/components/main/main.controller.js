@@ -11,7 +11,33 @@
         $rootScope.sliderheight = 0;
         $scope.numberPoints = 0;
 
+        $scope.replaceAll = function (str, find, replace) {
+            return str.replace(new RegExp(find, 'g'), replace);
+        }
+
         $scope.createMap = function () {
+
+            L.Control.Layers.include({
+                getActiveOverlays: function () {
+
+                    // Create array for holding active layers
+                    var active = [];
+                    var context = this;
+                    // Iterate all layers in control
+                    context._layers.forEach(function (obj) {
+
+                        // Check if it's an overlay and added to the map
+                        if (obj.overlay && context._map.hasLayer(obj.layer)) {
+
+                            // Push layer to active array
+                            active.push(obj);
+                        }
+                    });
+
+                    // Return array
+                    return active;
+                }
+            });
 
             var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
                     '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -53,52 +79,206 @@
                 zIndex: 200
             }).addTo(map);
 
+            $scope.flightPlanOnEachFeature = function (feature,layer) {
+                // console.log(feature.properties.Altitude)
+                var popupContent = "Altitude: "+ feature.properties.Altitude;
+                layer.bindPopup(popupContent);
+            }
 
-            /*DEM Legend*/
+            $scope.getColor = function(x) {
+                return x < 46     ?    '#ffeda0':
+                     x < 48.1     ?   '#feb24c':
+                     x < 50.8     ?   '#f03b20':
+                                      '#f01010' ;
+            };
+            $scope.getColors = function() {
+                return ['#ffeda0', '#feb24c', '#f03b20', '#f01010'] ;
+            };
+
+            var flightPlanLayer = L.esri.featureLayer({
+                url: "https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/FightPath/FeatureServer/1",
+                style: function (feature) {
+                    return {
+                        "color": $scope.getColor(feature.properties.Altitude),
+                        "opacity": 1,
+                    }
+                },
+                onEachFeature: $scope.flightPlanOnEachFeature
+            });
+
+
+
+            var descriptionBox = L.control({position: 'bottomleft'});
             var legendDEM = L.control({position: 'bottomright'});
-            legendDEM.onAdd = function () {
-                var div = L.DomUtil.create('DEM', 'DEM-legend');
-
-                div.innerHTML = '<b>DEM Scale</b> <br>';
-                var valuesTable = '<div class="">';
-                valuesTable +=    '<table style=\"width: 100%;\">';
-                valuesTable +=        '<tr>';
-                valuesTable +=            '<td style=\"text-align: left;\">';
-                valuesTable +=                '<span>0</span>';
-                valuesTable +=            '</td>';
-                valuesTable +=            '<td style=\"text-align: right;\">';
-                valuesTable +=                '<span>17</span>';
-                valuesTable +=            '</td>';
-                valuesTable +=        '</tr>';
-                valuesTable +=    '</table>';
-                valuesTable += '</div>';
-
-                div.innerHTML += valuesTable;
-                div.innerHTML += '<div class="dem-rainbow"></div>';
-
-
-                return div;
-            };
-            legendDEM.addTo(map); //Added by default
-            /*End DEM Legend*/
-            
-             /*Zoom button*/
             var legendCenterButton = L.control({position: 'bottomright'});
-            legendCenterButton.onAdd = function () {
-                var div = L.DomUtil.create('center', 'center-button');
+            var flightPlanLegend = L.control({position: 'bottomright'});
 
-                var zooming = '<span ng-click="zoomRiver()">';
-                zooming += '<img style="width: 24px; height: 24px;" src="app/components/assets/button_icons/meeting-point-32.png"/>';
-                zooming += '</span>';
-                div.innerHTML = zooming;
+            $scope.loadLegends = function() {
+                /*Layers Legend*/
+                descriptionBox.onAdd = function () {
+                    var div = L.DomUtil.create('UAaSLayers', 'layers-description');
 
-                var linkFunction = $compile(angular.element(div));
-                var newScope = $scope.$new();
+                    var overlayLayers = $scope.ctrl.getActiveOverlays();
+                    var mosaicDisplayValue = "none";
+                    var demDisplayValue = "none";
+                    var floatingPointsDisplayValue = "none";
+                    var hillshadeDisplayValue = "none";
+                    var slopeDisplayValue = "none";
+                    var ndviDisplayValue = "none";
+                    var flightPlanDisplayValue = "none";
 
-                return linkFunction(newScope)[0];
-            };
-            legendCenterButton.addTo(map); //Added by default
-            /*End Zoom button*/
+                    for (var overlayId in overlayLayers) {
+                        // console.log(overlayLayers[overlayId].name);
+                        var layerName = overlayLayers[overlayId].name;
+                        if (layerName === 'Mosaic Layer') {
+                            mosaicDisplayValue = "";
+                        }
+                        if (layerName === 'DSM Layer') {
+                            demDisplayValue = "";
+                        }
+                        if (layerName === "Floating Points Layer") {
+                            floatingPointsDisplayValue = "";
+                        }
+                        if (layerName === "Flight Plan Layer") {
+                            flightPlanDisplayValue = "";
+                        }
+                        if (layerName === 'Hillshade Layer') {
+                            hillshadeDisplayValue = "";
+                        }
+                        if (layerName === 'Slope Layer') {
+                            slopeDisplayValue = "";
+                        }
+                        if (layerName === "NDVI Layer") {
+                            ndviDisplayValue = "";
+                        }
+                    }
+
+                    div.innerHTML = '<span class="layer-description-title">Layers description:</span> <br>';
+                    var valuesTable = '<div class="layer-description-container">';
+
+                    valuesTable += '<div id="Mosaic" style="display: ' + mosaicDisplayValue + '"><span>';
+                    valuesTable += '<b>Mosaic:</b> Orthomosaic of RGB and Multispectral images of the project area composed by five bands Green, Red, Red Edge, NIR 1 and NIR2 respectively.';
+                    valuesTable += '</span></div>';
+
+                    valuesTable += '<div id="DSM" style="display: ' + demDisplayValue + '"><span>';
+                    valuesTable += '<b>DSM:</b> Surface model of project area derived from overlaped images taken by the drone. This layer contains of elevation data represented as point cloud.';
+                    valuesTable += '</span></div>';
+
+                    valuesTable += '<div id="FloatingPoints" style="display: ' + floatingPointsDisplayValue + '"><span>';
+                    valuesTable += '<b>Floating Points:</b> Three floating objects means to measure stream velocity of River Aa which its movement captured by thermal camera.';
+                    valuesTable += '</span></div>';
+
+                    valuesTable += '<div id="FlightPlan" style="display: ' + flightPlanDisplayValue + '"><span>';
+                    valuesTable += '<b>Fligh Plan:</b> Path followed by the Unmanned Areal Vehicle displaying the route and the altitude of the flight.';
+                    valuesTable += '</span></div>';
+
+                    valuesTable += '<div id="Hillshade" style="display: ' + hillshadeDisplayValue + '"><span>';
+                    valuesTable += '<b>Hillshade:</b> Hillshade file showing project area with sun\'s angle as a prespective.';
+                    valuesTable += '</span></div>';
+
+                    valuesTable += '<div id="Slope" style="display: ' + slopeDisplayValue + '"><span>';
+                    valuesTable += '<b>Slope:</b> Derived from DSM, this slope layer contains slope angle of project area topographic situation.';
+                    valuesTable += '</span></div>';
+
+                    valuesTable += '<div id="NDVI" style="display: ' + ndviDisplayValue + '"><span>';
+                    valuesTable += '<b>NDVI:</b> Normalized Difference Vegetation Index (NDVI) of the project area depicting health condition of surrounding vegetation.';
+                    valuesTable += '</span></div>';
+
+                    valuesTable += '</div>';
+
+                    div.innerHTML += valuesTable;
+
+                    return div;
+                };
+                descriptionBox.addTo(map); //Added by default
+                /*End DEM Legend*/
+
+                /*DEM Legend*/
+                legendDEM.onAdd = function () {
+                    var div = L.DomUtil.create('DEM', 'DEM-legend');
+
+                    div.innerHTML = '<b>DEM Scale</b> <br>';
+                    var valuesTable = '<div class="">';
+                    valuesTable += '<table style=\"width: 100%;\">';
+                    valuesTable += '<tr>';
+                    valuesTable += '<td style=\"text-align: left;\">';
+                    valuesTable += '<span>0</span>';
+                    valuesTable += '</td>';
+                    valuesTable += '<td style=\"text-align: right;\">';
+                    valuesTable += '<span>17</span>';
+                    valuesTable += '</td>';
+                    valuesTable += '</tr>';
+                    valuesTable += '</table>';
+                    valuesTable += '</div>';
+
+                    div.innerHTML += valuesTable;
+                    div.innerHTML += '<div class="dem-rainbow"></div>';
+
+                    return div;
+                };
+                legendDEM.addTo(map); //Added by default
+                /*End DEM Legend*/
+
+                /*Flight Plan Legend*/
+                flightPlanLegend.onAdd = function () {
+                    var div = L.DomUtil.create('fligthPlandLegend', 'flight-plan-legend');
+
+                    div.innerHTML= '<b>Flight Plan Altitude (m): </b>' +'<br>';
+
+                    var colors = $scope.getColors();
+
+                    var grades = [0, 46, 48.1, 50.8];
+
+                    for(var i = 0; i < colors.length; i++){
+                        div.innerHTML +=
+                        '<i style="background:' + colors[i] + '"></i> ' +
+                        grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+                    }
+
+                    return div;
+                };
+
+                /*Zoom button*/
+                legendCenterButton.onAdd = function () {
+                    var div = L.DomUtil.create('center', 'center-button');
+
+                    var zooming = '<span ng-click="zoomRiver()">';
+                    zooming += '<img style="width: 24px; height: 24px;" src="app/components/assets/button_icons/meeting-point-32.png"/>';
+                    zooming += '</span>';
+                    div.innerHTML = zooming;
+
+                    var linkFunction = $compile(angular.element(div));
+                    var newScope = $scope.$new();
+
+                    return linkFunction(newScope)[0];
+                };
+                legendCenterButton.addTo(map); //Added by default
+                /*End Zoom button*/
+            }
+
+            $scope.activateDescription = function (layerName) {
+                if (layerName === 'Mosaic Layer') {
+                    $("#Mosaic").css("display","");
+                }
+                if (layerName === 'DSM Layer') {
+                    $("#DSM").css("display","");
+                }
+                if (layerName === "Floating Points Layer") {
+                    $("#FloatingPoints").css("display","");
+                }
+            }
+
+            $scope.deactivateDescription = function (layerName) {
+                if (layerName === 'Mosaic Layer') {
+                    $("#Mosaic").css("display","none");
+                }
+                if (layerName === 'DSM Layer') {
+                    $("#DSM").css("display","none");
+                }
+                if (layerName === "Floating Points Layer") {
+                    $("#FloatingPoints").css("display","none");
+                }
+            }
 
             // all available markers
             $scope.markerpts = [
@@ -154,21 +334,30 @@
             $scope.overlays = {
                 "Mosaic Layer": MosaicLayer,
                 "DSM Layer": DSM,
-                "floating experiment": markersDummyLayer
-            };
+                "Floating Points Layer": markersDummyLayer,
+                "Flight Plan Layer": flightPlanLayer
+            }
 
-            $scope.ctrl = L.control.layers(baseLayers, $scope.overlays).addTo(map);
+
+            $scope.ctrl = L.control.layers(baseLayers, $scope.overlays);
+            //$scope.ctrl = L.control.activeLayers(baseLayers, $scope.overlays);
+            $scope.ctrl.addTo(map);
 
             $scope.showMarkers();
             $scope.unloadMarkers();
+            $scope.loadLegends();
 
             $scope.onOverlayAdd = function (e) {
                 console.log(e);
+                if (e.name === 'Mosaic Layer') {
+                    $("#Mosaic").css("display","");
+                }
                 if (e.name === 'DSM Layer') {
                     map.removeControl(legendDEM);
                     legendDEM.addTo(map);
+                    $("#DSM").css("display","");
                 }
-                if (e.name === "floating experiment") {
+                if (e.name === "Floating Points Layer") {
                     // 1. add all markers
                     $scope.loadMarkers();
 
@@ -178,11 +367,26 @@
                     // 3. change size of map
                     $rootScope.sliderheight = 60;
 
-
-
+                    $("#FloatingPoints").css("display","");
                 }
+
+                if (e.name === "Flight Plan Layer") {
+                    $("#FlightPlan").css("display","");
+                    flightPlanLegend.addTo(map);
+                }
+
                 map.removeControl(legendCenterButton);
                 legendCenterButton.addTo(map);
+
+                var overlayLayers = $scope.ctrl.getActiveOverlays();
+                for (var overlayId in overlayLayers) {
+                    console.log(overlayLayers[overlayId].name);
+                    $scope.activateDescription(overlayLayers[overlayId].name);
+                }
+                if(overlayLayers.length > 0){
+                    descriptionBox.addTo(map);
+                }
+
                 // 4. update window:
                 $timeout(function () {
                     window.dispatchEvent(new Event('resize'));
@@ -192,7 +396,14 @@
             };
             $scope.onOverlayRemove = function (e) {
                 console.log(e);
-                if (e.name === "floating experiment") {
+                if (e.name === 'Mosaic Layer') {
+                    $("#Mosaic").css("display","none");
+                }
+                if (e.name === 'DSM Layer') {
+                    map.removeControl(legendDEM);
+                    $("#DSM").css("display","none");
+                }
+                if (e.name === "Floating Points Layer") {
                     // 1. remove all markers
                     $scope.unloadMarkers();
 
@@ -201,15 +412,22 @@
 
                     // 3. change size of map
                     $rootScope.sliderheight = 0;
-
-
+                    $("#FloatingPoints").css("display","none");
                 }
-                if (e.name === 'DSM Layer') {
-                    map.removeControl(legendDEM);
+
+                if (e.name === "Flight Plan Layer") {
+                    map.removeControl(flightPlanLegend);
+                    $("#FlightPlan").css("display","none");
                 }
 
                 map.removeControl(legendCenterButton);
                 legendCenterButton.addTo(map);
+
+                var overlayLayers = $scope.ctrl.getActiveOverlays();
+                if(overlayLayers.length == 0){
+                    map.removeControl(descriptionBox);
+                }
+
                 // 4. update window:
                 $timeout(function () {
                     window.dispatchEvent(new Event('resize'));
