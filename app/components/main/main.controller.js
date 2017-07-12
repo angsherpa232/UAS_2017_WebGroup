@@ -426,7 +426,7 @@
             $scope.overlays = {
                 "Mosaic Layer": MosaicLayer,
                 "DSM Layer": DSM,
-                "Floating Points Layer": markersDummyLayer
+                "Floating Points Layer": markersDummyLayer,
                 "Flight Plan Layer": flightPlanLayer
             };
 
