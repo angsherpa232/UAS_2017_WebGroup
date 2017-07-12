@@ -85,20 +85,20 @@
                 maxNativeZoom: 18
             }).addTo(map);
 
-            $scope.flightPlanOnEachFeature = function (feature,layer) {
+            $scope.flightPlanOnEachFeature = function (feature, layer) {
                 // console.log(feature.properties.Altitude)
-                var popupContent = "Altitude: "+ feature.properties.Altitude;
+                var popupContent = "Altitude: " + feature.properties.Altitude;
                 layer.bindPopup(popupContent);
             }
 
-            $scope.getColor = function(x) {
-                return x < 46     ?    '#ffeda0':
-                     x < 48.1     ?   '#feb24c':
-                     x < 50.8     ?   '#f03b20':
-                                      '#f01010' ;
+            $scope.getColor = function (x) {
+                return x < 46 ? '#ffeda0' :
+                        x < 48.1 ? '#feb24c' :
+                        x < 50.8 ? '#f03b20' :
+                        '#f01010';
             };
-            $scope.getColors = function() {
-                return ['#ffeda0', '#feb24c', '#f03b20', '#f01010'] ;
+            $scope.getColors = function () {
+                return ['#ffeda0', '#feb24c', '#f03b20', '#f01010'];
             };
 
             var flightPlanLayer = L.esri.featureLayer({
@@ -120,7 +120,7 @@
             var legendCenterButton = L.control({position: 'bottomright'});
             var flightPlanLegend = L.control({position: 'bottomright'});
 
-            $scope.loadLegends = function() {
+            $scope.loadLegends = function () {
                 /*Layers Legend*/
                 descriptionBox.onAdd = function () {
                     var div = L.DomUtil.create('UAaSLayers', 'layers-description');
@@ -230,16 +230,16 @@
                 flightPlanLegend.onAdd = function () {
                     var div = L.DomUtil.create('fligthPlandLegend', 'flight-plan-legend');
 
-                    div.innerHTML= '<b>Flight Plan Altitude (m): </b>' +'<br>';
+                    div.innerHTML = '<b>Flight Plan Altitude (m): </b>' + '<br>';
 
                     var colors = $scope.getColors();
 
                     var grades = [0, 46, 48.1, 50.8];
 
-                    for(var i = 0; i < colors.length; i++){
+                    for (var i = 0; i < colors.length; i++) {
                         div.innerHTML +=
-                        '<i style="background:' + colors[i] + '"></i> ' +
-                        grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+                                '<i style="background:' + colors[i] + '"></i> ' +
+                                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
                     }
 
                     return div;
@@ -265,25 +265,25 @@
 
             $scope.activateDescription = function (layerName) {
                 if (layerName === 'Mosaic Layer') {
-                    $("#Mosaic").css("display","");
+                    $("#Mosaic").css("display", "");
                 }
                 if (layerName === 'DSM Layer') {
-                    $("#DSM").css("display","");
+                    $("#DSM").css("display", "");
                 }
                 if (layerName === "Floating Points Layer") {
-                    $("#FloatingPoints").css("display","");
+                    $("#FloatingPoints").css("display", "");
                 }
             }
 
             $scope.deactivateDescription = function (layerName) {
                 if (layerName === 'Mosaic Layer') {
-                    $("#Mosaic").css("display","none");
+                    $("#Mosaic").css("display", "none");
                 }
                 if (layerName === 'DSM Layer') {
-                    $("#DSM").css("display","none");
+                    $("#DSM").css("display", "none");
                 }
                 if (layerName === "Floating Points Layer") {
-                    $("#FloatingPoints").css("display","none");
+                    $("#FloatingPoints").css("display", "none");
                 }
             }
 
@@ -442,12 +442,12 @@
             $scope.onOverlayAdd = function (e) {
                 console.log(e);
                 if (e.name === 'Mosaic Layer') {
-                    $("#Mosaic").css("display","");
+                    $("#Mosaic").css("display", "");
                 }
                 if (e.name === 'DSM Layer') {
                     map.removeControl(legendDEM);
                     legendDEM.addTo(map);
-                    $("#DSM").css("display","");
+                    $("#DSM").css("display", "");
                 }
                 if (e.name === "Floating Points Layer") {
                     // 1. add all markers
@@ -459,13 +459,10 @@
                     // 3. change size of map
                     $rootScope.sliderheight = 60;
 
-                    $("#FloatingPoints").css("display","");
-                }
+                    $("#FloatingPoints").css("display", "");
 
-                if (e.name === "Flight Plan Layer") {
-                    $("#FlightPlan").css("display","");
-                    flightPlanLegend.addTo(map);
                     // 4. change viewport to current selected Experiment
+                    
                     $scope.playPressed = false;
                     // 1. unload previous markers
                     for (var i = 0; i <= $scope.markerpts[$scope.previousSelectedFloatingData].length; i++) {
@@ -492,7 +489,11 @@
                             200);
 
                     $scope.previousSelectedFloatingData = $scope.selectedFloatingData;
+                }
 
+                if (e.name === "Flight Plan Layer") {
+                    $("#FlightPlan").css("display", "");
+                    flightPlanLegend.addTo(map);
                 }
 
                 map.removeControl(legendCenterButton);
@@ -503,7 +504,7 @@
                     console.log(overlayLayers[overlayId].name);
                     $scope.activateDescription(overlayLayers[overlayId].name);
                 }
-                if(overlayLayers.length > 0){
+                if (overlayLayers.length > 0) {
                     descriptionBox.addTo(map);
                 }
 
@@ -517,16 +518,16 @@
             $scope.onOverlayRemove = function (e) {
                 console.log(e);
                 if (e.name === 'Mosaic Layer') {
-                    $("#Mosaic").css("display","none");
+                    $("#Mosaic").css("display", "none");
                 }
                 if (e.name === 'DSM Layer') {
                     map.removeControl(legendDEM);
-                    $("#DSM").css("display","none");
+                    $("#DSM").css("display", "none");
                 }
                 if (e.name === "Floating Points Layer") {
                     // stop autoplay:
-                    $scope.playPressed= false;
-                    
+                    $scope.playPressed = false;
+
                     // 1. remove all markers
                     $scope.unloadMarkers();
 
@@ -535,19 +536,19 @@
 
                     // 3. change size of map
                     $rootScope.sliderheight = 0;
-                    $("#FloatingPoints").css("display","none");
+                    $("#FloatingPoints").css("display", "none");
                 }
 
                 if (e.name === "Flight Plan Layer") {
                     map.removeControl(flightPlanLegend);
-                    $("#FlightPlan").css("display","none");
+                    $("#FlightPlan").css("display", "none");
                 }
 
                 map.removeControl(legendCenterButton);
                 legendCenterButton.addTo(map);
 
                 var overlayLayers = $scope.ctrl.getActiveOverlays();
-                if(overlayLayers.length == 0){
+                if (overlayLayers.length == 0) {
                     map.removeControl(descriptionBox);
                 }
 
@@ -564,7 +565,7 @@
         }; //end of createMap Function
 
         $scope.timeInterval = 20; // 20ms for data rows 0 - 699; rest 40ms.
-        
+
         function forwardSlider() {
             setTimeout(function () {
                 var current = $scope.slider.value + 1;
@@ -586,9 +587,10 @@
                 window.dispatchEvent(new Event('resize'));
                 if (current === 700)
                     $scope.timeInterval = 40;
-                console.log($scope.timeInterval*$scope.videoSpeed);
+                console.log($scope.timeInterval * $scope.videoSpeed);
             }, $scope.timeInterval * $scope.videoSpeed);// milliseconds timeout before show next:
-        };
+        }
+        ;
 
         $scope.playPressed = false;
         $scope.videoSpeed = 1;
