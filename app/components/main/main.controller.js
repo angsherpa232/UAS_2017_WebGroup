@@ -76,14 +76,14 @@
                 zIndex: 200,
                 maxZoom: 22,
                 maxNativeZoom: 18
-            });
+            }).addTo(map);
 
             var DSM = L.esri.tiledMapLayer({
                 url: "http://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/River_Aa_DSM/MapServer",
                 zIndex: 200,
                 maxZoom: 22,
                 maxNativeZoom: 18
-            }).addTo(map);
+            });
 
             var NDVILayer = L.esri.tiledMapLayer({
                 url: "https://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/NDVI_milti_subset1_tif/MapServer",
