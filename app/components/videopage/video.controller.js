@@ -20,7 +20,6 @@
             }
         ]
 
-
         $scope.currentVideo = function (index) {//get unique index then help to play the video after the user clicks
             $scope.play = true;
             $scope.current_video = $scope.UAVVideos[index];
