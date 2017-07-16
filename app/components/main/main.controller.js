@@ -126,6 +126,27 @@
                 onEachFeature: $scope.flightPlanOnEachFeature
             });
 
+            var aspectLayer = L.esri.tiledMapLayer({
+                url: "https://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/Aspect_tif1_tif/MapServer",
+                zIndex: 200,
+                maxZoom: 22,
+                maxNativeZoom: 18
+            });
+
+			var slopeLayer = L.esri.tiledMapLayer({
+                url: "https://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/Slope_tif1/MapServer",
+                zIndex: 200,
+                maxZoom: 22,
+                maxNativeZoom: 18
+            });
+
+			var hillshadeLayer = L.esri.tiledMapLayer({
+                url: "https://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/HillSha_tif1/MapServer",
+                zIndex: 200,
+                maxZoom: 22,
+                maxNativeZoom: 18
+            });
+
 
 
             var descriptionBox = L.control({position: 'bottomleft'});
@@ -143,10 +164,12 @@
                     var mosaicDisplayValue = "none";
                     var demDisplayValue = "none";
                     var floatingPointsDisplayValue = "none";
+                    var falseColorDisplayValue = "none";
                     var hillshadeDisplayValue = "none";
                     var slopeDisplayValue = "none";
                     var ndviDisplayValue = "none";
                     var flightPlanDisplayValue = "none";
+                    var aspectDisplayValue = "none";
 
                     for (var overlayId in overlayLayers) {
                         // console.log(overlayLayers[overlayId].name);
@@ -157,6 +180,11 @@
                         if (layerName === 'DSM') {
                             demDisplayValue = "";
                         }
+
+                        if (layerName === 'False Color') {
+                            falseColorDisplayValue = "";
+                        }
+
                         if (layerName === "Floating Points") {
                             floatingPointsDisplayValue = "";
                         }
@@ -171,6 +199,9 @@
                         }
                         if (layerName === "NDVI") {
                             ndviDisplayValue = "";
+                        }
+                        if (layerName === "Aspect") {
+                            aspectDisplayValue = "";
                         }
                     }
 
@@ -190,21 +221,31 @@
                     valuesTable += '<b>NDVI:</b> Normalized Difference Vegetation Index (NDVILayer) of the project area depicting health condition of surrounding vegetation.';
                     valuesTable += '</span></div>';
 
+                    valuesTable += '<div id="FalseColor" style="display: ' + falseColorDisplayValue + '"><span>';
+                    valuesTable += '<b>False Color:</b> False Color description.';
+                    valuesTable += '</span></div>';
+
                     valuesTable += '<div id="FlightPlan" style="display: ' + flightPlanDisplayValue + '"><span>';
                     valuesTable += '<b>Fligh Plan:</b> Path followed by the Unmanned Areal Vehicle displaying the route and the altitude of the flight.';
                     valuesTable += '</span></div>';
 
-                    valuesTable += '<div id="FloatingPoints" style="display: ' + floatingPointsDisplayValue + '"><span>';
-                    valuesTable += '<b>Floating Points:</b> Three floating objects means to measure stream velocity of River Aa which its movement captured by thermal camera.';
+                    valuesTable += '<div id="Aspect" style="display: ' + aspectDisplayValue + '"><span>';
+                    valuesTable += '<b>Aspect:</b> Aspect description.';
+                    valuesTable += '</span></div>';
+
+                    valuesTable += '<div id="Slope" style="display: ' + slopeDisplayValue + '"><span>';
+                    valuesTable += '<b>Slope:</b> Derived from DSM, this slope layer contains slope angle of project area topographic situation.';
                     valuesTable += '</span></div>';
 
                     valuesTable += '<div id="Hillshade" style="display: ' + hillshadeDisplayValue + '"><span>';
                     valuesTable += '<b>Hillshade:</b> Hillshade file showing project area with sun\'s angle as a prespective.';
                     valuesTable += '</span></div>';
 
-                    valuesTable += '<div id="Slope" style="display: ' + slopeDisplayValue + '"><span>';
-                    valuesTable += '<b>Slope:</b> Derived from DSM, this slope layer contains slope angle of project area topographic situation.';
+                    valuesTable += '<div id="FloatingPoints" style="display: ' + floatingPointsDisplayValue + '"><span>';
+                    valuesTable += '<b>Floating Points:</b> Three floating objects means to measure stream velocity of River Aa which its movement captured by thermal camera.';
                     valuesTable += '</span></div>';
+
+
 
                     valuesTable += '</div>';
 
@@ -224,7 +265,7 @@
                 legendDEM.onAdd = function () {
                     var div = L.DomUtil.create('DEM', 'DEM-legend');
 
-                    div.innerHTML = '<b>DEM Scale (m)</b> <br>';
+                    div.innerHTML = '<b>DSM Scale (m)</b> <br>';
                     var valuesTable = '<div class="">';
                     valuesTable += '<table style=\"width: 100%;\">';
                     valuesTable += '<tr>';
@@ -243,7 +284,7 @@
 
                     return div;
                 };
-                legendDEM.addTo(map); //Added by default
+                // legendDEM.addTo(map); //Added by default
                 /*End DEM Legend*/
 
                 /*Flight Plan Legend*/
@@ -296,6 +337,18 @@
                 if (layerName === "NDVI") {
                     $("#NDVI").css("display", "");
                 }
+                if (layerName === "False Color") {
+                    $("#FalseColor").css("display", "");
+                }
+                if (layerName === "Aspect") {
+                    $("#NDVI").css("display", "");
+                }
+                if (layerName === "Slope") {
+                    $("#NDVI").css("display", "");
+                }
+                if (layerName === "Hillshade") {
+                    $("#NDVI").css("display", "");
+                }
             }
 
             $scope.deactivateDescription = function (layerName) {
@@ -310,6 +363,18 @@
                 }
                 if (layerName === "NDVI") {
                     $("#NDVI").css("display", "none");
+                }
+                if (layerName === "False Color") {
+                    $("#FalseColor").css("display", "none");
+                }
+                if (layerName === "Aspect") {
+                    $("#Aspect").css("display", "none");
+                }
+                if (layerName === "Slope") {
+                    $("#Slope").css("display", "none");
+                }
+                if (layerName === "Hillshade") {
+                    $("#Hillshade").css("display", "none");
                 }
             }
 
@@ -455,6 +520,9 @@
                 "NDVI": NDVILayer,
                 "False Color": falseColorLayer,
                 "Flight Plan": flightPlanLayer,
+                "Aspect": aspectLayer,
+                "Slope": slopeLayer,
+                "Hillshade": hillshadeLayer,
                 "Floating Points": markersDummyLayer
             };
 
@@ -536,6 +604,21 @@
                     $scope.zoomRiver();
                 }
 
+                if (e.name === 'Aspect') {
+                    $("#Aspect").css("display", "");
+                    $scope.zoomRiver();
+                }
+
+                if (e.name === 'Slope') {
+                    $("#Slope").css("display", "");
+                    $scope.zoomRiver();
+                }
+
+                if (e.name === 'Hillshade') {
+                    $("#Hillshade").css("display", "");
+                    $scope.zoomRiver();
+                }
+
                 map.removeControl(legendCenterButton);
                 legendCenterButton.addTo(map);
 
@@ -588,6 +671,18 @@
                 }
                 if (e.name === 'False Color') {
                     $("#FalseColor").css("display", "none");
+                }
+
+                if (e.name === 'Aspect') {
+                    $("#Aspect").css("display", "none");
+                }
+
+                if (e.name === 'Slope') {
+                    $("#Slope").css("display", "none");
+                }
+
+                if (e.name === 'Hillshade') {
+                    $("#Hillshade").css("display", "none");
                 }
 
                 map.removeControl(legendCenterButton);
