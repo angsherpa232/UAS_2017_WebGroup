@@ -8,8 +8,9 @@
             <tbody>
             <tr ng-show="play">
                 <td>
-                    <video width=560 height=315 style="cursor: pointer;" ng-click="currentVideo($index)" autoplay
+                    <video style="cursor: pointer; width: 100%;height:100%" ng-click="currentVideo($index)" autoplay
                            controls
+
                            ng-src="{{current_video.Video | trustUrl}}"/>
                 </td>
             </tr>
@@ -39,7 +40,7 @@
                 <td>{{uav.Description}}</td>
                 <td>
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"
-                            ng-click="currentVideo($index)">Play
+                            ng-click="currentVideo($index)">Load
                     </button>
                 </td>
             </tr>
