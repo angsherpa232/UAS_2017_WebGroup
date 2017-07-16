@@ -5,7 +5,6 @@
 
         console.log('VideoCtrl started.');
         $scope.title = 'UAS Webapp';
-
         $scope.play = false;//variable to avoid videos auto play
         $scope.UAVVideos = [ //  array of videos  with its three attributes
             {

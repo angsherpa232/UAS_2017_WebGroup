@@ -1,34 +1,50 @@
-<div flex class="homepage" layout="row">
-    <div flex="15"></div>
-    <div flex layout="column">
-        <h1><strong>Home</strong> </h1>
-        <p> Welcome to Unmanned Aerial System course 2017 project.</p>
-        <ul style="list-style-type:none">
-            <li><b>Map</b> menu:
-                <ul class="sub-tree">
-                    <li>See the excursion location "Aa River"</li>
-                    <li>Orthomosaic image</li>
-                    <li>NDVI Map</li>
-                    <li>Classification Map</li>
-                    <li>Digital Elevation Model</li>
-                </ul>
-            </li>
-            <li><b>Video</b> menu:
-                <ul class="sub-tree">
-                    <li>View the flight video and river's flow rates information</li>
-                </ul>
-            </li>
 
-            <li><b>About</b> menu
-                <ul class="sub-tree">
-                    <li>Find our who are we and our project background</li>
+<head>
+    <link href="../../../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+
+
+
+    <div class="col-lg-2" style="padding-top:1%;padding-left: 0%;">
+        <ul style="list-style-type:none">
+            <li > <a href="" ng-click="toggle()"><b>{{mapContent}}</b> menu:</a>
+                <ul  ng-show="show" style="list-style-type:none;" >
+                    <br/>
+                    <li> <a ng-click="map()">See the excursion location "Aa River"</a></li>
+                    <li><a href="">Orthomosaic image</a></li>
+                    <li><a href="">NDVI Map</a></li>
+                    <li><a href="">Classification Map</a></li>
+                    <li><a href="">Digital Elevation Model</a></li>
+                </ul>
+            </li><br/>
+
+                <li> <a herf="" ng-click="togglevideo()"><b>{{videoContent}}</b> menu:</a>
+                <ul ng-show="videoshow"  style="list-style-type:none"><br/>
+                    <li> <a ng-click="video()">View the flight video</a></li>
+                    <li><a href="">River's flow rates information</a></li>
+                    <li><a ng-click="threed()">3D</a>
+                </ul>
+            </li>
+            <br/>
+            <li><a herf="" ng-click="toggleabout()"><b>{{aboutContent}}</b> menu:</a>
+                <br/>
+                <ul  ng-show="aboutshow"  style="list-style-type:none">
+                    <br/>
+                    <li><a ng-click="about()">Find our who are we and our project background</a></li>
                 </ul>
             </li>
         </ul>
-        <footer>
-            <a href="https://github.com/MojioMS/UAS_2017_WebGroup" title="View Source on GitHub"><img alt="View Source on GitHub" src="../app/components/assets/github-round.png" width="46" /></a> Visit us on Github
-            <p><br> Institute for Geoinformatics - The University of Muenster</p>
-        </footer>
+
     </div>
-    <div flex="15"></div>
+
+<div class="col-lg-7">
+    <img ng-src="/app/components/assets/AaImages/Aa.JPG" width="100%" height="100%" title="Renaturated river Aa,Muenster"/>
+</div>
+
+
+<div  class="col-lg-3">
+    <footer class="modal-footer" style="margin-bottom: 0px;text-align: left;">
+        <a href="https://github.com/MojioMS/UAS_2017_WebGroup" title="View Source on GitHub"><img alt="View Source on GitHub" src="../app/components/assets/github-round.png" width="46" /> Visit us on Github</a>
+        <p> <a href="https://www.ifgi.de" target="_blank">Institute for Geoinformatics - The University of Muenster</a></p>
+    </footer>
 </div>
