@@ -11,7 +11,7 @@
         $scope.videoContent="+ Video";
         $scope.aboutContent="+ About";
         $scope.aboutshow=false;
-        $scope.toggle=function()
+        $scope.toggle=function()// a function for show and hiding the content of map menu in the home page
         {
             if($scope.show==false) {
                 $scope.mapContent = "- Map";
@@ -22,8 +22,6 @@
                 $scope.mapContent = "+Map";
                 $scope.show = false;
             }
-
-
         }
         $scope.togglevideo=function()
         {
