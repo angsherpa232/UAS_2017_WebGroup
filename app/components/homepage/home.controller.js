@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function HomeCtrl($rootScope, $scope, $timeout, $mdSidenav) {
+    function HomeCtrl($rootScope, $scope, $timeout, $mdSidenav, $stateParams) {
 
         console.log('HomeCtrl started.');
         $scope.title = 'UAS Webapp';
