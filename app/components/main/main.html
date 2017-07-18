@@ -4,9 +4,12 @@
     <div id="mapid" style="height: {{height}}px;"></div>
     <div ng-show="my.slidershow" class="slider" layout="row">
         <md-select ng-model="selectedFloatingData" placeholder="1" class="md-no-underline videospeed" ng-change="vidDataChanged()">
-            <md-option value="0">Experiment 1</md-option>
-            <md-option value="1">Experiment 2</md-option>
-            <md-option value="2">Experiment 3</md-option>
+            <md-option ng-if="!screenIsXS" value="0">Experiment 1</md-option>
+            <md-option ng-if="!screenIsXS" value="1">Experiment 2</md-option>
+            <md-option ng-if="!screenIsXS" value="2">Experiment 3</md-option>
+            <md-option ng-if="screenIsXS" value="0">Exp. 1</md-option>
+            <md-option ng-if="screenIsXS" value="1">Exp. 2</md-option>
+            <md-option ng-if="screenIsXS" value="2">Exp. 3</md-option>
         </md-select>
         <md-button class="md-primary md-raised" ng-if="!playPressed && !screenIsXS" ng-click="playSlider()">PLAY</md-button>
         <md-button class="md-primary md-raised" ng-if="playPressed && !screenIsXS" ng-click="playSlider()">PAUSE</md-button>
