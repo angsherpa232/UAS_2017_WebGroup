@@ -11,12 +11,13 @@
             .run(function ($rootScope, $window) {
                 console.log("app started.");
 
-                $rootScope.height = $window.innerHeight - 62 - $rootScope.sliderheight;
+                $rootScope.height = $window.innerHeight - 52 - $rootScope.sliderheight;
+                $rootScope.sliderheight = 0;
 
                 angular.element($window).bind('resize', function () {
                     $rootScope.$apply(function () {
                         $rootScope.width = $window.innerWidth;
-                        $rootScope.height = $window.innerHeight - 62 - $rootScope.sliderheight;
+                        $rootScope.height = $window.innerHeight - 52 - $rootScope.sliderheight;
                     });
                 });
             });

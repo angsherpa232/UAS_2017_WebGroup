@@ -607,7 +607,6 @@
             $scope.loadLegends();
 
             $scope.onOverlayAdd = function (e) {
-                console.log(e);
                 if (e.name === 'Mosaic') {
                     $("#Mosaic").css("display", "");
                     $scope.zoomRiver();
@@ -711,7 +710,6 @@
 
             };
             $scope.onOverlayRemove = function (e) {
-                console.log(e);
                 if (e.name === 'Mosaic') {
                     $("#Mosaic").css("display", "none");
                 }
@@ -801,9 +799,10 @@
                 }
                 // update selection in slider:
                 window.dispatchEvent(new Event('resize'));
-                if (current === 700)
+                if (current >= 700)
                     $scope.timeInterval = 40;
-                console.log($scope.timeInterval * $scope.videoSpeed);
+                else
+                    $scope.timeInterval = 20;
             }, $scope.timeInterval * $scope.videoSpeed);// milliseconds timeout before show next:
         }
         ;
@@ -835,26 +834,6 @@
             [51.944716, 7.573150]
         ];
         $scope.vidDataChanged = function () {
-            console.log($scope.selectedFloatingData);
-            var sliderPointer = document.getElementsByClassName("rz-pointer");
-            switch ($scope.selectedFloatingData) {
-                case 0:
-                {
-                    sliderPointer.css["background-color"] = '#FF7700';
-                    break;
-                }
-                case 1:
-                {
-                    sliderPointer.style["background-color"] = '#00FFFF';
-                    break;
-                }
-                case 2:
-                {
-                    sliderPointer.css["background-color"] = '#9C00FF';
-                    break;
-                }
-            }
-            console.log(sliderPointer);
             if ($scope.previousSelectedFloatingData !== $scope.selectedFloatingData) {
                 $scope.playPressed = false;
                 // 1. unload previous markers
@@ -875,12 +854,12 @@
                 $scope.slider.value = 0;
                 // 4. zoom to map excerpt of selected experiment:
                 map.setView($scope.centerExperiments[$scope.selectedFloatingData], 21);
-
+                // 5. set videotime back to 0:00:
+                $scope.videoTime = "0:00";
                 $timeout(function () {
                     window.dispatchEvent(new Event('resize'));
                 },
                         200);
-
                 $scope.previousSelectedFloatingData = $scope.selectedFloatingData;
             }
         };
@@ -897,19 +876,15 @@
                 ceil: $scope.numberPoints,
                 id: 'slider-id',
                 onStart: function (id) {
-                    console.log('on start ' + id); // logs 'on start slider-id'
                 },
                 onChange: function (id) {
-                    console.log('on change ' + id); // logs 'on change slider-id'
                     $scope.showMarkers();
                 },
                 onEnd: function (id) {
-                    console.log('on end ' + id); // logs 'on end slider-id'
                 }, translate: function (value) {
                     return '';
                 },
                 getPointerColor: function (value) {
-                    console.log($scope.selectedFloatingData);
                     if ($scope.selectedFloatingData == 0)
                         return '#FF7700';
                     if ($scope.selectedFloatingData == 1)
