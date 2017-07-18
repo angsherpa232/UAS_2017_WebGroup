@@ -11,9 +11,28 @@
         $rootScope.sliderheight = 0;
         $scope.numberPoints = 0;
 
+        var orangeIcon = L.icon({
+            iconUrl: 'app/components/assets/floating/orange.png',
+            iconSize: [36, 48], // size of the icon
+            iconAnchor: [36, 0], // point of the icon which will correspond to marker's location
+            popupAnchor: [-18, 6] // point from which the popup should open relative to the iconAnchor
+        });
+        var tealIcon = L.icon({
+            iconUrl: 'app/components/assets/floating/teal.png',
+            iconSize: [36, 48], // size of the icon
+            iconAnchor: [36, 0], // point of the icon which will correspond to marker's location
+            popupAnchor: [-18, 6] // point from which the popup should open relative to the iconAnchor
+        });
+        var purpleIcon = L.icon({
+            iconUrl: 'app/components/assets/floating/purple.png',
+            iconSize: [36, 48], // size of the icon
+            iconAnchor: [36, 0], // point of the icon which will correspond to marker's location
+            popupAnchor: [-18, 6] // point from which the popup should open relative to the iconAnchor
+        });
+
         $scope.replaceAll = function (str, find, replace) {
             return str.replace(new RegExp(find, 'g'), replace);
-        }
+        };
 
         $scope.createMap = function () {
 
@@ -428,8 +447,9 @@
                         };
                         $scope.markerdata.push(obj);
                         $scope.markerpts[0][i] = new L.marker(
-                                [obj.lng, obj.lat]
-                                ).bindPopup('Time: ' + videoStamp);
+                                [obj.lng, obj.lat],
+                                {icon: orangeIcon}
+                        ).bindPopup('Time: ' + videoStamp);
                     }
                     $scope.dataAll.push($scope.markerdata);
                     $scope.markerdata = [];
@@ -467,8 +487,9 @@
                                 };
                                 $scope.markerdata.push(obj);
                                 $scope.markerpts[1][i] = new L.marker(
-                                        [obj.lng, obj.lat]
-                                        ).bindPopup('Time: ' + videoStamp);
+                                        [obj.lng, obj.lat],
+                                        {icon: tealIcon}
+                                ).bindPopup('Time: ' + videoStamp);
                             }
                             $scope.dataAll.push($scope.markerdata);
                             $scope.markerdata = [];
@@ -506,8 +527,9 @@
                                         };
                                         $scope.markerdata.push(obj);
                                         $scope.markerpts[2][i] = new L.marker(
-                                                [obj.lng, obj.lat]
-                                                ).bindPopup('Time: ' + videoStamp);
+                                                [obj.lng, obj.lat],
+                                                {icon: purpleIcon}
+                                        ).bindPopup('Time: ' + videoStamp);
                                     }
                                     $scope.dataAll.push($scope.markerdata);
                                     $scope.markerdata = [];
@@ -814,6 +836,25 @@
         ];
         $scope.vidDataChanged = function () {
             console.log($scope.selectedFloatingData);
+            var sliderPointer = document.getElementsByClassName("rz-pointer");
+            switch ($scope.selectedFloatingData) {
+                case 0:
+                {
+                    sliderPointer.css["background-color"] = '#FF7700';
+                    break;
+                }
+                case 1:
+                {
+                    sliderPointer.style["background-color"] = '#00FFFF';
+                    break;
+                }
+                case 2:
+                {
+                    sliderPointer.css["background-color"] = '#9C00FF';
+                    break;
+                }
+            }
+            console.log(sliderPointer);
             if ($scope.previousSelectedFloatingData !== $scope.selectedFloatingData) {
                 $scope.playPressed = false;
                 // 1. unload previous markers
@@ -866,6 +907,16 @@
                     console.log('on end ' + id); // logs 'on end slider-id'
                 }, translate: function (value) {
                     return '';
+                },
+                getPointerColor: function (value) {
+                    console.log($scope.selectedFloatingData);
+                    if ($scope.selectedFloatingData == 0)
+                        return '#FF7700';
+                    if ($scope.selectedFloatingData == 1)
+                        return '#00FFFF';
+                    if ($scope.selectedFloatingData == 2)
+                        return '#9C00FF';
+                    return '#FF7700';
                 }
             }
         };
