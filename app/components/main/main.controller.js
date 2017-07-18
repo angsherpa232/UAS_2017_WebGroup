@@ -72,7 +72,7 @@
             };
 
             var MosaicLayer = L.esri.tiledMapLayer({
-                url: "http://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/River_Aa_orthophoto/MapServer",
+                url: "https://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/Orthophoto_WTL1/MapServer",
                 zIndex: 200,
                 maxZoom: 22,
                 maxNativeZoom: 18
@@ -210,39 +210,39 @@
                     valuesTable += '<div class="layer-description-container">';
 
                     valuesTable += '<div id="Mosaic" style="display: ' + mosaicDisplayValue + '"><span>';
-                    valuesTable += '<b>Mosaic:</b> Orthomosaic of RGB and Multispectral images of the project area composed by five bands Green, Red, Red Edge, NIR 1 and NIR2 respectively.';
+                    valuesTable += '<b>Mosaic:</b> Orthomosaic of RGB bands (Red, Green, Blue).';
                     valuesTable += '</span></div>';
 
                     valuesTable += '<div id="DSM" style="display: ' + demDisplayValue + '"><span>';
-                    valuesTable += '<b>DSM:</b> Surface model of project area derived from overlaped images taken by the drone. This layer contains of elevation data represented as point cloud.';
+                    valuesTable += '<b>DSM:</b> Digital Surface Model of the the project area, dervied from overlapped images taken by the drone.';
                     valuesTable += '</span></div>';
 
                     valuesTable += '<div id="NDVI" style="display: ' + ndviDisplayValue + '"><span>';
-                    valuesTable += '<b>NDVI:</b> Normalized Difference Vegetation Index (NDVILayer) of the project area depicting health condition of surrounding vegetation.';
+                    valuesTable += '<b>NDVI:</b> Normalized Difference Vegetation Index of the project area depicting the health condition of surrounding vegetation.';
                     valuesTable += '</span></div>';
 
                     valuesTable += '<div id="FalseColor" style="display: ' + falseColorDisplayValue + '"><span>';
-                    valuesTable += '<b>False Color:</b> False Color description.';
+                    valuesTable += '<b>False Color:</b> A multisppectral image of the project area composed of five bands: Green, Red, Red Edge, NIR1, NIR2.';
                     valuesTable += '</span></div>';
 
                     valuesTable += '<div id="FlightPlan" style="display: ' + flightPlanDisplayValue + '"><span>';
-                    valuesTable += '<b>Fligh Plan:</b> Path followed by the Unmanned Areal Vehicle displaying the route and the altitude of the flight.';
+                    valuesTable += '<b>Flight Plan:</b> The path followed by the drone, displaying the route and the flight\'s altitude.';
                     valuesTable += '</span></div>';
 
                     valuesTable += '<div id="Aspect" style="display: ' + aspectDisplayValue + '"><span>';
-                    valuesTable += '<b>Aspect:</b> Aspect description.';
+                    valuesTable += '<b>Aspect:</b> This layer displays the direction the slopes face to illustrate the surface terrain in the study area.';
                     valuesTable += '</span></div>';
 
                     valuesTable += '<div id="Slope" style="display: ' + slopeDisplayValue + '"><span>';
-                    valuesTable += '<b>Slope:</b> Derived from DSM, this slope layer contains slope angle of project area topographic situation.';
+                    valuesTable += '<b>Slope:</b> Derived from the DSM, this layer contains slope angle of project area to demonstrate topograpy.';
                     valuesTable += '</span></div>';
 
                     valuesTable += '<div id="Hillshade" style="display: ' + hillshadeDisplayValue + '"><span>';
-                    valuesTable += '<b>Hillshade:</b> Hillshade file showing project area with sun\'s angle as a prespective.';
+                    valuesTable += '<b>Hillshade:</b> This layer is a shaded relief raster created by the DSM and the sun angle.';
                     valuesTable += '</span></div>';
 
                     valuesTable += '<div id="FloatingPoints" style="display: ' + floatingPointsDisplayValue + '"><span>';
-                    valuesTable += '<b>Floating Points:</b> Three floating objects means to measure stream velocity of River Aa which its movement captured by thermal camera.';
+                    valuesTable += '<b>Floating Points:</b> The experiment carried out by the Video Processing Group. The movement of three heat-emitting floating objects (visualized as markers) was used to measure the stream velocity of the River Aa with the aid of a thermal camera. Select in the timeslider the Experiment you wish to view and press "PLAY". ';
                     valuesTable += '</span></div>';
 
 

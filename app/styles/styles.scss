@@ -105,6 +105,7 @@
 
     .toolbar-title{
         padding-left: 20px;
+        font-weight: 700;
     }
 }
 
@@ -291,6 +292,9 @@ html, body {
         clear: left;
         text-align: center;
     }
+    .icon-credits{
+
+    }
 }
 
 .slider {
@@ -305,7 +309,7 @@ html, body {
 }
 
 .homepage {
-    h1 {
+    /*h1 {
         text-align: left;
     }
     p {
@@ -325,6 +329,15 @@ html, body {
     }
     .sub-tree{
         padding-left: 50px;
+    }*/
+    .ul{
+        color: black;
+    }
+    .col-lg-2 a{
+        color: black;
+    }
+    .description{
+        padding-left: 40px;
     }
     .photo-credits{
         font-size: 10px;

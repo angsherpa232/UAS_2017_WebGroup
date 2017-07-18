@@ -6,6 +6,9 @@
 <div class="homepage">
 
     <div class="col-lg-2" style="padding-top:1%;padding-left: 0%;">
+        <p class="description">Welcome to the Web Portal of Unmanned Aerial Systems 2017!</p>
+        <p class="description">The aim of this project was to implement UAV methods for environmental analysis to evaluate the renaturation efforts of the Aa River in M&#252;nster, Germany.</p>
+        <p class="description">Click the menu below to explore a particular section, or use the navigation menu in the top-left side:</p>
         <ul style="list-style-type:none">
             <li > <a href="" ng-click="toggle()"><b>{{mapContent}}</b> menu:</a>
                 <ul  ng-show="show" style="list-style-type:none;" >
@@ -18,11 +21,19 @@
                 </ul>
             </li><br/>
 
-                <li> <a herf="" ng-click="togglevideo()"><b>{{videoContent}}</b> menu:</a>
+            <li>
+                <a herf="" ng-click="toggleThreeD()"><b>{{threeDContent}}</b> menu:</a>
+                <ul  ng-show="threeDshow" style="list-style-type:none;" >
+                    <br/>
+                    <li><a ng-click="threed()">ESRI 3D Web Scene</a></li>
+                </ul>
+            </li>
+            <br/>
+
+            <li> <a herf="" ng-click="togglevideo()"><b>{{videoContent}}</b> menu:</a>
                 <ul ng-show="videoshow"  style="list-style-type:none"><br/>
                     <li> <a ng-click="video()">View the flight video</a></li>
-                    <li><a ng-click="map()">River's flow rates information</a></li>
-                    <li><a ng-click="threed()">3D</a>
+                    <li><a ng-click="video()">River's flow rates information</a></li>
                 </ul>
             </li>
             <br/>
