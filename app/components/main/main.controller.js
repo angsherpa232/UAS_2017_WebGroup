@@ -68,7 +68,7 @@
                 //"Satellite": satellite,
                 "Satellite Streets": satellitestreets,
                 "Dark Map": dark
-                //"Light Map": light
+                        //"Light Map": light
             };
 
             var MosaicLayer = L.esri.tiledMapLayer({
@@ -121,7 +121,7 @@
                     return {
                         "color": $scope.getColor(feature.properties.Altitude),
                         "opacity": 1,
-                    }
+                    };
                 },
                 onEachFeature: $scope.flightPlanOnEachFeature
             });
@@ -133,14 +133,14 @@
                 maxNativeZoom: 18
             });
 
-			var slopeLayer = L.esri.tiledMapLayer({
+            var slopeLayer = L.esri.tiledMapLayer({
                 url: "https://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/Slope_tif1/MapServer",
                 zIndex: 200,
                 maxZoom: 22,
                 maxNativeZoom: 18
             });
 
-			var hillshadeLayer = L.esri.tiledMapLayer({
+            var hillshadeLayer = L.esri.tiledMapLayer({
                 url: "https://tiles.arcgis.com/tiles/W47q82gM5Y2xNen1/arcgis/rest/services/HillSha_tif1/MapServer",
                 zIndex: 200,
                 maxZoom: 22,
@@ -403,17 +403,33 @@
                 dataType: "text",
                 complete: function () {
                     // call a function on complete 
+                    var ms = 0;
+                    var mins = 0;
+                    var secs = 0;
+                    var videoStamp = "0:00";
                     for (var i = 0; i < $scope.data.length; i++) {
                         var partsOfStr = $scope.data[i][0].split(';');
+                        if (i === 0) {
+                            ms = 0;
+                        } else {
+                            ms = Number(partsOfStr[2]);
+                        }
+                        mins = (ms / 1000 / 60) << 0;
+                        secs = Math.floor((ms / 1000) % 60);
+                        if (secs < 10) {
+                            videoStamp = "" + mins + ":0" + secs;
+                        } else {
+                            videoStamp = "" + mins + ":" + secs;
+                        }
                         var obj = {
                             lng: partsOfStr[0],
                             lat: partsOfStr[1],
-                            time: partsOfStr[2],
+                            time: videoStamp,
                         };
                         $scope.markerdata.push(obj);
                         $scope.markerpts[0][i] = new L.marker(
                                 [obj.lng, obj.lat]
-                                ).bindPopup('Time: ' + obj.time);
+                                ).bindPopup('Time: ' + videoStamp);
                     }
                     $scope.dataAll.push($scope.markerdata);
                     $scope.markerdata = [];
@@ -425,9 +441,25 @@
                         },
                         dataType: "text",
                         complete: function () {
+                            var ms = 0;
+                            var mins = 0;
+                            var secs = 0;
+                            var videoStamp = "0:00";
                             // call a function on complete 
                             for (var i = 0; i < $scope.data.length; i++) {
                                 var partsOfStr = $scope.data[i][0].split(';');
+                                if (i === 0) {
+                                    ms = 0;
+                                } else {
+                                    ms = Number(partsOfStr[2]);
+                                }
+                                mins = (ms / 1000 / 60) << 0;
+                                secs = Math.floor((ms / 1000) % 60);
+                                if (secs < 10) {
+                                    videoStamp = "" + mins + ":0" + secs;
+                                } else {
+                                    videoStamp = "" + mins + ":" + secs;
+                                }
                                 var obj = {
                                     lng: partsOfStr[0],
                                     lat: partsOfStr[1],
@@ -436,7 +468,7 @@
                                 $scope.markerdata.push(obj);
                                 $scope.markerpts[1][i] = new L.marker(
                                         [obj.lng, obj.lat]
-                                        ).bindPopup('Time: ' + obj.time);
+                                        ).bindPopup('Time: ' + videoStamp);
                             }
                             $scope.dataAll.push($scope.markerdata);
                             $scope.markerdata = [];
@@ -448,8 +480,24 @@
                                 },
                                 dataType: "text",
                                 complete: function () {
+                                    var ms = 0;
+                                    var mins = 0;
+                                    var secs = 0;
+                                    var videoStamp = "0:00";
                                     // call a function on complete 
                                     for (var i = 0; i < $scope.data.length; i++) {
+                                        if (i === 0) {
+                                            ms = 0;
+                                        } else {
+                                            ms = Number(partsOfStr[2]);
+                                        }
+                                        mins = (ms / 1000 / 60) << 0;
+                                        secs = Math.floor((ms / 1000) % 60);
+                                        if (secs < 10) {
+                                            videoStamp = "" + mins + ":0" + secs;
+                                        } else {
+                                            videoStamp = "" + mins + ":" + secs;
+                                        }
                                         var partsOfStr = $scope.data[i][0].split(';');
                                         var obj = {
                                             lng: partsOfStr[0],
@@ -459,7 +507,7 @@
                                         $scope.markerdata.push(obj);
                                         $scope.markerpts[2][i] = new L.marker(
                                                 [obj.lng, obj.lat]
-                                                ).bindPopup('Time: ' + obj.time);
+                                                ).bindPopup('Time: ' + videoStamp);
                                     }
                                     $scope.dataAll.push($scope.markerdata);
                                     $scope.markerdata = [];
@@ -484,6 +532,8 @@
                 // add current marker:
                 $scope.markerpts[$scope.selectedFloatingData][i].addTo(map);
                 $scope.addedMarkers[i] = true;
+                // update videoStamp time:
+                $scope.videoTime = $scope.markerpts[$scope.selectedFloatingData][i].getPopup()._content.substr(6);
                 // remove previous marker:
                 for (var j = 0; j < i; j++)
                     if ($scope.addedMarkers[j]) {
@@ -559,7 +609,7 @@
                     $("#FloatingPoints").css("display", "");
 
                     // 4. change viewport to current selected Experiment
-                    
+
                     $scope.playPressed = false;
                     // 1. unload previous markers
                     for (var i = 0; i <= $scope.markerpts[$scope.previousSelectedFloatingData].length; i++) {
@@ -707,6 +757,7 @@
 
         $scope.timeInterval = 20; // 20ms for data rows 0 - 699; rest 40ms.
 
+        $scope.videoTime = "0:00";
         function forwardSlider() {
             setTimeout(function () {
                 var current = $scope.slider.value + 1;
@@ -716,6 +767,8 @@
                     $scope.slider.value = current;
                     $scope.markerpts[$scope.selectedFloatingData][current].addTo(map);
                     $scope.addedMarkers[current] = true;
+                    // update videoStamp time:
+                    $scope.videoTime = $scope.markerpts[$scope.selectedFloatingData][current].getPopup()._content.substr(6);
                     // remove previous marker
                     $scope.markerpts[$scope.selectedFloatingData][current - 1].remove(map);
                     $scope.addedMarkers[current - 1] = false;
@@ -811,6 +864,8 @@
                 },
                 onEnd: function (id) {
                     console.log('on end ' + id); // logs 'on end slider-id'
+                }, translate: function (value) {
+                    return '';
                 }
             }
         };

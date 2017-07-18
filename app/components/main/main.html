@@ -3,11 +3,10 @@
     <!-- put leaflet inside 'nd stuff... -->
     <div id="mapid" style="height: {{height}}px;"></div>
     <div ng-show="my.slidershow" class="slider" layout="row">
-        <p ng-if="!screenIsXS">dataset:</p>
         <md-select ng-model="selectedFloatingData" placeholder="1" class="md-no-underline videospeed" ng-change="vidDataChanged()">
-            <md-option value="0">1</md-option>
-            <md-option value="1">2</md-option>
-            <md-option value="2">3</md-option>
+            <md-option value="0">Experiment 1</md-option>
+            <md-option value="1">Experiment 2</md-option>
+            <md-option value="2">Experiment 3</md-option>
         </md-select>
         <md-button class="md-primary md-raised" ng-if="!playPressed && !screenIsXS" ng-click="playSlider()">PLAY</md-button>
         <md-button class="md-primary md-raised" ng-if="playPressed && !screenIsXS" ng-click="playSlider()">PAUSE</md-button>
@@ -23,6 +22,7 @@
             <md-option value="2">0.5x</md-option>
             <md-option value="4">0.25x</md-option>
         </md-select>
+        <p> {{videoTime}} </p>
         <rzslider flex
             rz-slider-model="slider.value" 
             rz-slider-options="slider.options"></rzslider>
