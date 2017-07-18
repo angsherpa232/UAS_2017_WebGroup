@@ -292,6 +292,10 @@ html, body {
 .homepage .sub-tree {
   padding-left: 50px; }
 
+.homepage .photo-credits {
+  font-size: 10px;
+  text-align: right; }
+
 .md-select-menu-container {
   z-index: 1005; }
 
