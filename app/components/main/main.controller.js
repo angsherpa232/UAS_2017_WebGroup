@@ -14,20 +14,20 @@
         var orangeIcon = L.icon({
             iconUrl: 'app/components/assets/floating/orange.png',
             iconSize: [36, 48], // size of the icon
-            iconAnchor: [36, 0], // point of the icon which will correspond to marker's location
-            popupAnchor: [-18, 6] // point from which the popup should open relative to the iconAnchor
+            iconAnchor: [0,72], // point of the icon which will correspond to marker's location
+            popupAnchor: [18, -62] // point from which the popup should open relative to the iconAnchor
         });
         var tealIcon = L.icon({
             iconUrl: 'app/components/assets/floating/teal.png',
             iconSize: [36, 48], // size of the icon
-            iconAnchor: [36, 0], // point of the icon which will correspond to marker's location
-            popupAnchor: [-18, 6] // point from which the popup should open relative to the iconAnchor
+            iconAnchor: [0,72], // point of the icon which will correspond to marker's location
+            popupAnchor: [18, -62] // point from which the popup should open relative to the iconAnchor
         });
         var purpleIcon = L.icon({
             iconUrl: 'app/components/assets/floating/purple.png',
             iconSize: [36, 48], // size of the icon
-            iconAnchor: [36, 0], // point of the icon which will correspond to marker's location
-            popupAnchor: [-18, 6] // point from which the popup should open relative to the iconAnchor
+            iconAnchor: [0,72], // point of the icon which will correspond to marker's location
+            popupAnchor: [18, -62] // point from which the popup should open relative to the iconAnchor
         });
 
         $scope.replaceAll = function (str, find, replace) {
