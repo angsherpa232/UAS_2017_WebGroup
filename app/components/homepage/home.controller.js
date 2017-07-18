@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function HomeCtrl($rootScope, $scope, $timeout, $mdSidenav, $stateParams) {
+    function HomeCtrl($rootScope, $scope, $timeout) {
 
         console.log('HomeCtrl started.');
         $scope.title = 'UAS Webapp';
@@ -138,7 +138,10 @@
         }
 
         $timeout(function () {
-            FirstMove();
+            if (!$rootScope.animating){
+                FirstMove();
+                $rootScope.animating = true;
+            }
         },
                 1000);
     }

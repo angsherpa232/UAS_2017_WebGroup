@@ -10,6 +10,7 @@
             //.value("UASBaseUrl", "https://ad-boxx.de")
             .run(function ($rootScope, $window) {
                 console.log("app started.");
+                $rootScope.animating = false;
 
                 $rootScope.height = $window.innerHeight - 52 - $rootScope.sliderheight;
                 $rootScope.sliderheight = 0;
@@ -20,5 +21,6 @@
                         $rootScope.height = $window.innerHeight - 52 - $rootScope.sliderheight;
                     });
                 });
+
             });
 })();
