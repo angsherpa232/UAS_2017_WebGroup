@@ -8,6 +8,8 @@
         $scope.show=false;
         $scope.mapContent="+ Map";
         $scope.videoshow=false;
+        $scope.threeDContent="+ 3D";
+        $scope.threeDshow=false;
         $scope.videoContent="+ Video";
         $scope.aboutContent="+ About";
         $scope.aboutshow=false;
@@ -21,6 +23,18 @@
             {
                 $scope.mapContent = "+Map";
                 $scope.show = false;
+            }
+        }
+        $scope.toggleThreeD=function()
+        {
+            if($scope.threeDshow==false) {
+                $scope.threeDContent="- 3D";
+                $scope.threeDshow=true;
+            }
+            else
+            {
+                $scope.threeDContent="+ 3D";
+                $scope.threeDshow=false;
             }
         }
         $scope.togglevideo=function()

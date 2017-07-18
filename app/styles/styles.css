@@ -101,7 +101,8 @@
   #main-toolbar img {
     padding-bottom: 2px; }
   #main-toolbar .toolbar-title {
-    padding-left: 20px; }
+    padding-left: 20px;
+    font-weight: 700; }
 
 md-toolbar {
   height: 60px;
@@ -271,30 +272,37 @@ html, body {
   .slider .rz-pointer {
     background-color: #0d6af0; }
 
-.homepage h1 {
-  text-align: left; }
-
-.homepage p {
-  text-align: left; }
-
-.homepage ul {
-  text-align: left;
-  padding-left: 0px; }
-
-.homepage footer {
-  padding: 1em;
-  clear: left;
-  text-align: center; }
-
-.homepage footer p {
-  text-align: center; }
-
-.homepage .sub-tree {
-  padding-left: 50px; }
-
-.homepage .photo-credits {
-  font-size: 10px;
-  text-align: right; }
+.homepage {
+  /*h1 {
+        text-align: left;
+    }
+    p {
+        text-align: left;
+    }
+    ul {
+        text-align: left;
+        padding-left: 0px;
+    }
+    footer {
+        padding: 1em;
+        clear: left;
+        text-align: center;
+    }
+    footer p{
+        text-align: center;
+    }
+    .sub-tree{
+        padding-left: 50px;
+    }*/ }
+  .homepage .ul {
+    color: black; }
+  .homepage .col-lg-2 a {
+    color: black; }
+  .homepage .description {
+    padding-left: 40px; }
+  .homepage .photo-credits {
+    font-size: 10px;
+    text-align: right; }
 
 .md-select-menu-container {
   z-index: 1005; }
