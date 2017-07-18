@@ -1,7 +1,7 @@
 # UAS_2017_WebGroup
 WebApp 
 
-The Webapp is built with [AngularJS 1.58](https://angularjs.org/). 
+The Webapp is built with [AngularJS 1.65](https://angularjs.org/). 
 The UI components are built with [Angular Material](https://material.angularjs.org/).
 
 ## Installation
@@ -26,7 +26,7 @@ Run the development web-server via gulp:
 
     $ gulp
 
-You can now have a quick look on the Webapp via your webbrowser at 
+You can now have a look on the Webapp via your webbrowser at 
 ```localhost:4014``` or ```127.0.0.1:4014```
 
 Not a fan of gulp? Then run it via NodeJS: 
@@ -46,11 +46,3 @@ open the project's ```/gulpfile.js``` and change the port in line
 if you want or have to change port when hosting via nodeJS, 
 open the project's ```/all.js``` and change the port in line 
 7 to your desire.
-
-## Basic Useage:
-
-TODO...
-
-## Motivation Behind the project
-
-TODO...
