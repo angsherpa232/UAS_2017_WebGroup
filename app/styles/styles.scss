@@ -325,6 +325,14 @@ html, body {
     .sub-tree{
         padding-left: 50px;
     }*/
+    #myContainer {
+        position: relative;
+    }
+
+    #drone {
+        position:absolute;
+    }
+
     .ul{
         color: black;
     }
