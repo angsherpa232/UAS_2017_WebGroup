@@ -1,0 +1,65 @@
+
+<head>
+    <link href="../../../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<div class="homepage">
+
+    <div class="col-lg-2" style="padding-top:1%;padding-left: 0%;">
+        <p class="description">Welcome to the Web Portal of Unmanned Aerial Systems 2017!</p>
+        <p class="description">The aim of this project was to implement UAV methods for environmental analysis to evaluate the renaturation efforts of the Aa River in M&#252;nster, Germany.</p>
+        <p class="description">Click the menu below to explore a particular section, or use the navigation menu in the top-left side:</p>
+        <ul style="list-style-type:none">
+            <li > <a href="" ng-click="toggle()"><b>{{mapContent}}</b> menu:</a>
+                <ul  ng-show="show" style="list-style-type:none;" >
+                    <br/>
+                    <li> <a ng-click="map()">See the excursion location "Aa River"</a></li>
+                    <li><a ng-click="map()">Orthomosaic image</a></li>
+                    <li><a ng-click="map()">NDVI Map</a></li>
+                    <li><a ng-click="map()">Classification Map</a></li>
+                    <li><a ng-click="map()">Digital Elevation Model</a></li>
+                </ul>
+            </li><br/>
+
+            <li>
+                <a herf="" ng-click="toggleThreeD()"><b>{{threeDContent}}</b> menu:</a>
+                <ul  ng-show="threeDshow" style="list-style-type:none;" >
+                    <br/>
+                    <li><a ng-click="threed()">ESRI 3D Web Scene</a></li>
+                </ul>
+            </li>
+            <br/>
+
+            <li> <a herf="" ng-click="togglevideo()"><b>{{videoContent}}</b> menu:</a>
+                <ul ng-show="videoshow"  style="list-style-type:none"><br/>
+                    <li> <a ng-click="video()">View the flight video</a></li>
+                    <li><a ng-click="video()">River's flow rates information</a></li>
+                </ul>
+            </li>
+            <br/>
+            <li><a herf="" ng-click="toggleabout()"><b>{{aboutContent}}</b> menu:</a>
+                <br/>
+                <ul  ng-show="aboutshow"  style="list-style-type:none">
+                    <br/>
+                    <li><a ng-click="about()">Find our who are we and our project background</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="col-lg-7">
+        <img id ="myContainer" ng-src="/app/components/assets/AaImages/Aa.JPG" width="100%" height="100%" title="Renaturated river Aa,Muenster"/>
+        <img id ="drone" src="/app/components/assets/drone.png" alt="drone" height="75" width="75">
+        <p class="photo-credits">Image by <a href="https://www.uni-muenster.de/OekologischePlanung/en/team/lehmann.html">Jan R.K. Lehmann</a></p>
+    </div>
+
+
+    <div  class="col-lg-3">
+        <footer class="modal-footer" style="margin-bottom: 0px;text-align: left;">
+            <a href="https://github.com/MojioMS/UAS_2017_WebGroup" title="View Source on GitHub"><img alt="View Source on GitHub" src="../app/components/assets/github-round.png" width="46" /> Visit us on Github</a>
+            <p> <a href="https://www.ifgi.de" target="_blank">Institute for Geoinformatics - University of M&#252;nster</a></p>
+        </footer>
+        <div flex="15"></div>
+    </div>
+</div>

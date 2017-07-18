@@ -13,19 +13,24 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "^1.5.8",
-    "angular-route": "1.5.8",
-    "angular-ui-router": "^0.2.18",
+    "jQuery": "^3.2.1",
+    "bootstrap": "^3.3.7",
+    "angular": "1.6.5",
     "angular-material": "~1.1.1",
-    "angular-animate": "1.5.8",
+    "angular-animate": "1.6.5",
     "angular-cookies": "1.5.8",
     "ui-leaflet": "^2.0.0",
     "angular-translate": "^2.15.1",
-    "leaflet": "^1.0.3"
+    "leaflet": "^1.0.3",
+    "leaflet.activelayers": "^0.3.0",
+    "angular-aria": "^1.6.4",
+    "angular-ui-router": "^1.0.4",
+    "angularjs-slider": "^6.2.2",
+    "esri-leaflet": "^2.0.8",
+    "jquery-csv": "^0.8.3"
   },
   "resolutions": {
-    "angular": "1.x",
-    "angular-ui-router": "^1.0.3",
-    "leaflet": "^1.0.3"
+    "leaflet": "^1.0.3",
+    "angular": "1.6.5"
   }
 }

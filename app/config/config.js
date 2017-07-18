@@ -5,12 +5,29 @@
         console.log('run config');
 
         $stateProvider
-                .state('main', {
-                    url: '/main',
+                .state('map', {
+                    url: '/map',
                     templateUrl: 'app/components/main/main.html',
                     controller: 'MainCtrl',
                     authenticate: false
                 })
+                .state('home', {
+                    url: '/home',
+                    controller: 'HomeCtrl',
+                    templateUrl: 'app/components/homepage/home.html',
+                    authenticate: false
+                })
+                .state('video', {
+                    url: '/video',
+                    controller: 'VideoCtrl',
+                    templateUrl: 'app/components/videopage/video.html',
+                    authenticate: false
+                })
+            .state('3D', {
+                url: '/3D',
+                templateUrl: 'app/components/3D/3D.html',
+                authenticate: false
+            })
                 .state('about', {
                     url: '/about',
                     controller: 'AboutCtrl',
@@ -18,7 +35,7 @@
                     authenticate: false
                 });
 
-        $urlRouterProvider.otherwise('/main');
+        $urlRouterProvider.otherwise('/home');
 
         $mdThemingProvider
                 .definePalette('UASWebApp-one', {

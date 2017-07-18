@@ -1,0 +1,73 @@
+<md-sidenav class="md-sidenav-left, uas-sidenav" md-component-id="left"
+             md-backdrop md-whiteframe="4" flex>
+
+    <md-toolbar class="md-theme-indigo">
+        <div>
+            <h1 class="md-toolbar-tools">Menu
+            </h1>
+            <ng-click
+                    ng-click="toggleLeft()">
+                <!--<img class="button-icon close-button-img"
+                     src="app/components/assets/button_icons/x-mark-4-32.png">-->
+            </ng-click>
+
+
+        </div>
+    </md-toolbar>
+
+    <md-content layout-margin>
+        <!-- <p>
+            This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.
+        </p> -->
+
+        <div>
+            <div class="menu-sidenav-button">
+
+
+                <a ng-click="home()">
+                    <i class="fa fa-home"> </i>
+                    <md-button ng-click="toggleLeft()" class="md-accent uas-md-button">
+                        <img class="button-icon" src="app/components/assets/button_icons/home-icon-32.png">
+                        Home
+                    </md-button>
+                </a>
+            </div>
+            <div class="menu-sidenav-button">
+                <a ng-click="map()">
+                    <i class="fa fa-shield"></i>
+                    <md-button ng-click="toggleLeft()" class="md-accent uas-md-button">
+                        <img class="button-icon" src="app/components/assets/button_icons/world-map-32.png">
+                        Map
+                    </md-button>
+                </a>
+            </div>
+            <div class="menu-sidenav-button">
+                <a ng-click="threed()">
+                    <i class="fa fa-shield"></i>
+                    <md-button ng-click="toggleLeft()" class="md-accent uas-md-button">
+                        <img class="button-icon" src="app/components/assets/button_icons/3D.png">
+                        3D
+                    </md-button>
+                </a>
+            </div>
+            <div class="menu-sidenav-button">
+                <a ng-click="video()">
+                    <i class="fa fa-shield"></i>
+                    <md-button ng-click="toggleLeft()" class="md-accent uas-md-button">
+                        <img class="button-icon" src="app/components/assets/button_icons/film-icon-32.png">
+                        Video
+                    </md-button>
+                </a>
+            </div>
+            <div class="menu-sidenav-button">
+                <a ng-click="about()">
+                    <i class="fa fa-shield"></i>
+                    <md-button ng-click="toggleLeft()" class="md-accent uas-md-button">
+                        <img class="button-icon" src="app/components/assets/button_icons/about-icon-32.png">
+                        About
+                    </md-button>
+                </a>
+            </div>
+        </div>
+    </md-content>
+</md-sidenav>
