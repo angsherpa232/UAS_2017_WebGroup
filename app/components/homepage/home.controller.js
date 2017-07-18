@@ -63,6 +63,44 @@
             }
         }
 
+        function FirstMove() {
+            var elem = document.getElementById("drone");
+            var pos = 0;
+            var id = setInterval(frame, 1);
+
+            function frame() {
+                if (pos == 1000) {
+                    clearInterval(id);
+                    SecondMove(pos);
+                } else {
+                    pos++;
+                    elem.style.top = pos + 'px';
+                    elem.style.left = pos + 'px';
+                }
+            }
+
+        }
+
+        function SecondMove(pos) {
+            var elem = document.getElementById("drone");
+            elem.style.top = pos + 'px';
+            elem.style.left = pos + 'px';
+            //var pos=0
+            var id = setInterval(frame, 1);
+
+            function frame() {
+                if (pos == 0) {
+                    clearInterval(id);
+                    FirstMove();
+                } else {
+                    pos--;
+                    elem.style.top = pos + 'px';
+                    elem.style.left = pos + 'px';
+                }
+            }
+        }
+
+        FirstMove();
     };
 
 
