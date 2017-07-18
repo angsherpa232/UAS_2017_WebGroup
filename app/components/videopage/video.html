@@ -1,12 +1,71 @@
-
 <head>
     <link href="../../../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/app/styles/imageEnlarge.css" rel="stylesheet">
+
+
 </head>
 <div flex>
-    <div class="span4 pull-right" style="text-align:right;">
-        <table class="table table-hover" style="float:right;">
+    <div class="col-lg-5" style="width:45% ">
+
+        <table class="table table-hover">
+            <thead>
+
+            </thead>
             <tbody>
-            <tr ng-show="play">
+
+            <tr ng-repeat="uav in UAVVideos">
+                <td>
+                    <video  height=99 style="cursor: pointer;" ng-click="currentVideo($index)"
+                            ng-src="{{uav.Video | trustUrl}}"/>
+                </td>
+                <td>{{uav.Description}}</td>
+                <td>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"
+                            ng-click="currentVideo($index)">Load
+                    </button>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-6">
+        <a href="" ng-click="togglevideo()"><b>{{videoContent}} Analysis for Water Flow Dynamics in Aa River:</b> </a>
+        <div ng-show="videoshow">
+        Water flow dynamics of a river has major influence in the ecological functions of the river. An
+        intricate relationship exists between water flow dynamics and sedimentation. These processes
+        influence the prevalence of vegetation in the river which is a key part of river naturalization
+        process.
+        <br/>
+        <br/>
+        River velocity, a crucial measure of water flow dynamics is also an indicator of effectivity of
+        river naturalization process. In this project, we utilize video captured from UAV platform to
+        measure the velocity of the river. We deployed three floats on the river and captured the video as
+        the floats drifted along the river. The videos were captured with Sony A5100 in visible spectrum
+        and with FLIR Ocean Scout TK in thermal spectrum.
+            <br/>
+            <br/>
+        </div>
+        <div class="col-lg-10" style="padding-left: 0%;">
+            <div><a href="" ng-click="toggleimage()"><b>{{imageContent}} of Floats and UAV's Camera Setup</b> </a></div>
+           <div class="col-lg-6" ng-show="imageshow"> <img ng-src="/app/components/assets/AaImages/floats.JPG"
+                                                           class="thumbnail"   width="100%" height="100%" title="Floats of river Aa,Muenster"/></div>
+          <div class="col-lg-6  " ng-show="imageshow">  <img ng-src="/app/components/assets/AaImages/UAV and Camera.JPG" width="100%"
+                                                               height="100%" title="UAV Camera setup over river Aa,Muenster"/></div>
+        </div>
+        <div class="col-lg-11" style="padding-left: 0%;">
+            <div><a href="" ng-click="toggleconversion()"><b>{{conversionContent}}  from Image Coordinate System to Real World Coordinate System</b> </a></div>
+            <div class="col-lg-6" ng-show="conversionshow"> <img ng-src="/app/components/assets/AaImages/conversion.PNG"
+                                                            class="thumbnail"   width="100%" height="100%" /></div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-5" style="float: right;">
+        <table class="table table-hover" ng-show="play">
+            <tbody>
+            <tr>
                 <td>
                     <video style="cursor: pointer; width: 100%;height:100%" ng-click="currentVideo($index)" autoplay
                            controls
@@ -17,34 +76,6 @@
             <tr>
                 <td>{{current_video.Info}}</td>
             </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="span3 pull-left" style="padding-top: 1%; width:50% ">
-
-        <table class="table table-hover" style="float:left;">
-            <thead>
-            <!--<tr>
-                <td><strong>Videos</strong></td>
-                <td><strong>Description</strong></td>
-            </tr> -->
-
-            </thead>
-            <tbody>
-
-            <tr ng-repeat="uav in UAVVideos">
-                <td>
-                    <video  height=99 style="cursor: pointer;" ng-click="currentVideo($index)"
-                           ng-src="{{uav.Video | trustUrl}}"/>
-                </td>
-                <td>{{uav.Description}}</td>
-                <td>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"
-                            ng-click="currentVideo($index)">Load
-                    </button>
-                </td>
-            </tr>
-
             </tbody>
         </table>
     </div>
