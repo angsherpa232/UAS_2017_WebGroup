@@ -19,7 +19,7 @@
                 Info: 'June 2017,Aa river,Muenster Germany'
             },
             {
-                Video: '/app/components/assets/videos/Thermal.webm',
+                Video: '/app/components/assets/videos/Thermal.mp4',
                 Description: 'Video captured using thermal sensor',
                 Info: 'June 2017,Aa river,Münster Germany'
             },
@@ -29,17 +29,17 @@
                 Info: 'June 2017,Aa river,Münster Germany'
             },
             {
-                Video: '/app/components/assets/videos/Thermal_sta.webm',
+                Video: '/app/components/assets/videos/Thermal_sta.mp4',
                 Description: 'Video Captured Using Thermal Sensor (After Stabilization)',
                 Info: 'June 2017,Aa river,Münster Germany'
             },
             {
-                Video: '/app/components/assets/videos/RGB_obj.webm',
+                Video: '/app/components/assets/videos/RGB_obj.mp4',
                 Description: 'Object(Float) detection in video using template matching algorithm in openCV captured by RGB sensor',
                 Info: 'June 2017,Aa river,Münster Germany'
             },
             {
-                Video: '/app/components/assets/videos/Thermal_obj.webm',
+                Video: '/app/components/assets/videos/Thermal_obj.mp4',
                 Description: 'Object(Float) detection in video using image processing tool in matlab captured by thermal sensor',
                 Info: 'June 2017,Aa river,Münster Germany'
             },
@@ -49,7 +49,7 @@
                 Info: 'June 2017,Aa river,Münster Germany'
             },
             {
-                Video: '/app/components/assets/videos/Thermal_matlab.webm',
+                Video: '/app/components/assets/videos/Thermal_matlab.mp4',
                 Description: 'Object(Float) detection in video using image processing tool in matlab captured by thermal sensor',
                 Info: 'June 2017,Aa river,Münster Germany'
             }
