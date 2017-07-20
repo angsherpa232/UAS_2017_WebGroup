@@ -15,37 +15,63 @@
         $scope.UAVVideos = [ //  array of videos  with its three attributes
             {
                 Video: '/app/components/assets/videos/RGB.mp4',
-                Description: 'Video Captured Using RGB Sensor',
+                Description: 'Video captured using RGB sensor',
                 Info: 'June 2017,Aa river,Muenster Germany'
             },
             {
                 Video: '/app/components/assets/videos/Thermal.webm',
-                Description: 'Video Captured Using Thermal Sensor',
-                Info: 'June 2017,Aa river,Muenster Germany'
+                Description: 'Video captured using thermal sensor',
+                Info: 'June 2017,Aa river,Münster Germany'
             },
             {
                 Video: '/app/components/assets/videos/RGB_sta.mp4',
-                Description: 'Video Captured Using Thermal Sensor(After Stabilization)',
-                Info: 'June 2017,Aa river,Muenster Germany'
+                Description: 'Video captured using thermal sensor(after stabilization)',
+                Info: 'June 2017,Aa river,Münster Germany'
             },
             {
                 Video: '/app/components/assets/videos/Thermal_sta.webm',
                 Description: 'Video Captured Using Thermal Sensor (After Stabilization)',
-                Info: 'June 2017,Aa river,Muenster Germany'
+                Info: 'June 2017,Aa river,Münster Germany'
             },
             {
                 Video: '/app/components/assets/videos/RGB_obj.webm',
-                Description: 'Object(Float) detection Using Template Matching Algorithm in OpenCV in Video Captured BY RGB Sensor',
-                Info: 'June 2017,Aa river,Muenster Germany'
+                Description: 'Object(Float) detection in video using template matching algorithm in openCV captured by RGB sensor',
+                Info: 'June 2017,Aa river,Münster Germany'
             },
             {
                 Video: '/app/components/assets/videos/Thermal_obj.webm',
-                Description: 'Object(Float) Using Template Matching Algorithm in OpenCV in Video Captured BY Thermal Sensor',
-                Info: 'June 2017,Aa river,Muenster Germany'
+                Description: 'Object(Float) detection in video using image processing tool in matlab captured by thermal sensor',
+                Info: 'June 2017,Aa river,Münster Germany'
+            },
+            {
+                Video: '/app/components/assets/videos/RGB_matlab.mp4',
+                Description: 'Object(Float) detection in video using template matching algorithm in openCV captured by RGB sensor',
+                Info: 'June 2017,Aa river,Münster Germany'
+            },
+            {
+                Video: '/app/components/assets/videos/Thermal_matlab.webm',
+                Description: 'Object(Float) detection in video using image processing tool in matlab captured by thermal sensor',
+                Info: 'June 2017,Aa river,Münster Germany'
             }
         ]
 
         $scope.currentVideo = function (index) {//get unique index then help to play the video after the user clicks
+           if($scope.imageshow==true)
+           {
+               $scope.imageshow=false;
+               $scope.imageContent="+ Image";
+
+           }
+           else if($scope.conversionshow==true)
+           {
+               $scope.conversionshow=false;
+               $scope.conversionContent="+ Conversion";
+           }
+           else if($scope.videoshow==true)
+           {
+               $scope.videoshow=false;
+               $scope.videoContent="+ Video";
+           }
             $scope.play = true;
             $scope.current_video = $scope.UAVVideos[index];
         }
