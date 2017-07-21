@@ -166,7 +166,58 @@
                 maxNativeZoom: 18
             });
 
+            function getClassificationColor(className) {
+                var color = "#FFFFFF"
+                if(className === "Water"){
+                    color = "#6699ff";
+                }
+                if(className === "Trees"){
+                    color = "#006600";
+                }
+                if(className === "Shrub"){
+                    color = "#009933";
+                }
+                if(className === "Agriculture"){
+                    color = "#ffff00";
+                }if(className === "Grass"){
+                    color = "#33cc33";
+                }
+                if(className === "Road / Bare soil"){
+                    color = "#9999ff";
+                }
 
+                return color;
+            }
+
+            function style(feature) {
+                return {
+                    //fillColor: getColor(feature.properties.crime_rate),
+                    fillColor: getClassificationColor(feature.properties.Class),
+                    weight: 0.5,
+                    opacity: 1,
+                    color: 'black',
+                    dashArray: '0.1',
+                    fillOpacity: 0.6
+                };
+            }
+
+            function onEachFeature(feature, layer) {
+                // does this feature have a property named popupContent?
+                if (feature.properties && feature.properties.Class) {
+                    layer.bindPopup(feature.properties.Class);
+                }
+            }
+            var data;
+            var classificationLayer;
+
+            shp("resources/classification.zip").then(function(geojson){
+                console.log(geojson);
+                classificationLayer = L.geoJSON(geojson, {
+                    style: style,
+                    onEachFeature: onEachFeature
+                });
+                data=geojson
+            });
 
             var descriptionBox = L.control({position: 'bottomleft'});
             var legendDEM = L.control({position: 'bottomright'});
@@ -189,6 +240,7 @@
                     var ndviDisplayValue = "none";
                     var flightPlanDisplayValue = "none";
                     var aspectDisplayValue = "none";
+                    var classificationDisplayValue = "none";
 
                     for (var overlayId in overlayLayers) {
                         // console.log(overlayLayers[overlayId].name);
@@ -221,6 +273,9 @@
                         }
                         if (layerName === "Aspect") {
                             aspectDisplayValue = "";
+                        }
+                        if (layerName === "Classification") {
+                            classificationDisplayValue = "";
                         }
                     }
 
@@ -258,6 +313,10 @@
 
                     valuesTable += '<div id="Hillshade" style="display: ' + hillshadeDisplayValue + '"><span>';
                     valuesTable += '<b>Hillshade:</b> This layer is a shaded relief raster created by the DSM and the sun angle.';
+                    valuesTable += '</span></div>';
+
+                    valuesTable += '<div id="Classification" style="display: ' + hillshadeDisplayValue + '"><span>';
+                    valuesTable += '<b>Classification:</b> A supervised classification of land use and land cover of the study area.';
                     valuesTable += '</span></div>';
 
                     valuesTable += '<div id="FloatingPoints" style="display: ' + floatingPointsDisplayValue + '"><span>';
@@ -368,6 +427,9 @@
                 if (layerName === "Hillshade") {
                     $("#NDVI").css("display", "");
                 }
+                if (layerName === "Classification") {
+                    $("#Classification").css("display", "");
+                }
             }
 
             $scope.deactivateDescription = function (layerName) {
@@ -394,6 +456,9 @@
                 }
                 if (layerName === "Hillshade") {
                     $("#Hillshade").css("display", "none");
+                }
+                if (layerName === "Classification") {
+                    $("#Classification").css("display", "none");
                 }
             }
 
@@ -595,6 +660,7 @@
                 "Aspect": aspectLayer,
                 "Slope": slopeLayer,
                 "Hillshade": hillshadeLayer,
+                "Classification": classificationLayer,
                 "Floating Points": markersDummyLayer
             };
 
@@ -690,6 +756,11 @@
                     $scope.zoomRiver();
                 }
 
+                if (e.name === 'Classification') {
+                    $("#Classification").css("display", "");
+                    $scope.zoomRiver();
+                }
+
                 map.removeControl(legendCenterButton);
                 legendCenterButton.addTo(map);
 
@@ -753,6 +824,10 @@
 
                 if (e.name === 'Hillshade') {
                     $("#Hillshade").css("display", "none");
+                }
+
+                if (e.name === 'Classification') {
+                    $("#Classification").css("display", "none");
                 }
 
                 map.removeControl(legendCenterButton);
