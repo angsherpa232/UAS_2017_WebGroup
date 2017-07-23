@@ -14,19 +14,19 @@
         var orangeIcon = L.icon({
             iconUrl: 'app/components/assets/floating/orange.png',
             iconSize: [36, 48], // size of the icon
-            iconAnchor: [0,72], // point of the icon which will correspond to marker's location
+            iconAnchor: [0, 72], // point of the icon which will correspond to marker's location
             popupAnchor: [18, -62] // point from which the popup should open relative to the iconAnchor
         });
         var tealIcon = L.icon({
             iconUrl: 'app/components/assets/floating/teal.png',
             iconSize: [36, 48], // size of the icon
-            iconAnchor: [0,72], // point of the icon which will correspond to marker's location
+            iconAnchor: [0, 72], // point of the icon which will correspond to marker's location
             popupAnchor: [18, -62] // point from which the popup should open relative to the iconAnchor
         });
         var purpleIcon = L.icon({
             iconUrl: 'app/components/assets/floating/purple.png',
             iconSize: [36, 48], // size of the icon
-            iconAnchor: [0,72], // point of the icon which will correspond to marker's location
+            iconAnchor: [0, 72], // point of the icon which will correspond to marker's location
             popupAnchor: [18, -62] // point from which the popup should open relative to the iconAnchor
         });
 
@@ -61,15 +61,40 @@
             var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
                     '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
                     'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                    mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibmdhdmlzaCIsImEiOiJjaXFheHJmc2YwMDdoaHNrcWM4Yjhsa2twIn0.8i1Xxwd1XifUU98dGE9nsQ';
+                mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibmdhdmlzaCIsImEiOiJjaXFheHJmc2YwMDdoaHNrcWM4Yjhsa2twIn0.8i1Xxwd1XifUU98dGE9nsQ';
 
-            var grayscale = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18}),
-                    streets = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18}),
-                    outdoors = L.tileLayer(mbUrl, {id: 'mapbox.outdoors', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18}),
-                    satellite = L.tileLayer(mbUrl, {id: 'mapbox.satellite', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18}),
-                    dark = L.tileLayer(mbUrl, {id: 'mapbox.dark', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18}),
-                    light = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18}),
-                    satellitestreets = L.tileLayer(mbUrl, {id: 'mapbox.streets-satellite', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18});
+            var grayscale = L.tileLayer(mbUrl, {
+                    id: 'mapbox.light',
+                    attribution: mbAttr,
+                    maxZoom: 22,
+                    maxNativeZoom: 18
+                }),
+                streets = L.tileLayer(mbUrl, {
+                    id: 'mapbox.streets',
+                    attribution: mbAttr,
+                    maxZoom: 22,
+                    maxNativeZoom: 18
+                }),
+                outdoors = L.tileLayer(mbUrl, {
+                    id: 'mapbox.outdoors',
+                    attribution: mbAttr,
+                    maxZoom: 22,
+                    maxNativeZoom: 18
+                }),
+                satellite = L.tileLayer(mbUrl, {
+                    id: 'mapbox.satellite',
+                    attribution: mbAttr,
+                    maxZoom: 22,
+                    maxNativeZoom: 18
+                }),
+                dark = L.tileLayer(mbUrl, {id: 'mapbox.dark', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18}),
+                light = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr, maxZoom: 22, maxNativeZoom: 18}),
+                satellitestreets = L.tileLayer(mbUrl, {
+                    id: 'mapbox.streets-satellite',
+                    attribution: mbAttr,
+                    maxZoom: 22,
+                    maxNativeZoom: 18
+                });
 
 
             map = L.map('mapid', {
@@ -87,7 +112,7 @@
                 //"Satellite": satellite,
                 "Satellite Streets": satellitestreets,
                 "Dark Map": dark
-                        //"Light Map": light
+                //"Light Map": light
             };
 
             var MosaicLayer = L.esri.tiledMapLayer({
@@ -126,9 +151,9 @@
 
             $scope.getColor = function (x) {
                 return x < 46 ? '#ffeda0' :
-                        x < 48.1 ? '#feb24c' :
+                    x < 48.1 ? '#feb24c' :
                         x < 50.8 ? '#f03b20' :
-                        '#f01010';
+                            '#f01010';
             };
             $scope.getColors = function () {
                 return ['#ffeda0', '#feb24c', '#f03b20', '#f01010'];
@@ -168,21 +193,22 @@
 
             function getClassificationColor(className) {
                 var color = "#FFFFFF"
-                if(className === "Water"){
+                if (className === "Water") {
                     color = "#6699ff";
                 }
-                if(className === "Trees"){
+                if (className === "Trees") {
                     color = "#006600";
                 }
-                if(className === "Shrub"){
+                if (className === "Shrub") {
                     color = "#009933";
                 }
-                if(className === "Agriculture"){
+                if (className === "Agriculture") {
                     color = "#ffff00";
-                }if(className === "Grass"){
+                }
+                if (className === "Grass") {
                     color = "#33cc33";
                 }
-                if(className === "Road / Bare soil"){
+                if (className === "Road / Bare soil") {
                     color = "#9999ff";
                 }
 
@@ -207,17 +233,17 @@
                     layer.bindPopup(feature.properties.Class);
                 }
             }
-            var data;
+
             var classificationLayer;
 
-            shp("resources/classification.zip").then(function(geojson){
-                console.log(geojson);
-                classificationLayer = L.geoJSON(geojson, {
-                    style: style,
-                    onEachFeature: onEachFeature
+            shp("./app/resources/classification.zip").then(
+                function (geojson) {
+                    classificationLayer = L.geoJSON(geojson, {
+                        style: style,
+                        onEachFeature: onEachFeature
+                    });
+                    $scope.ctrl.addOverlay(classificationLayer, "Classification")
                 });
-                data=geojson
-            });
 
             var descriptionBox = L.control({position: 'bottomleft'});
             var legendDEM = L.control({position: 'bottomright'});
@@ -315,14 +341,13 @@
                     valuesTable += '<b>Hillshade:</b> This layer is a shaded relief raster created by the DSM and the sun angle.';
                     valuesTable += '</span></div>';
 
-                    valuesTable += '<div id="Classification" style="display: ' + hillshadeDisplayValue + '"><span>';
+                    valuesTable += '<div id="Classification" style="display: ' + classificationDisplayValue + '"><span>';
                     valuesTable += '<b>Classification:</b> A supervised classification of land use and land cover of the study area.';
                     valuesTable += '</span></div>';
 
                     valuesTable += '<div id="FloatingPoints" style="display: ' + floatingPointsDisplayValue + '"><span>';
                     valuesTable += '<b>Floating Points:</b> The experiment carried out by the Video Processing Group. The movement of three heat-emitting floating objects (visualized as markers) was used to measure the stream velocity of the River Aa with the aid of a thermal camera. Select in the timeslider the Experiment you wish to view and press "PLAY". ';
                     valuesTable += '</span></div>';
-
 
 
                     valuesTable += '</div>';
@@ -377,8 +402,8 @@
 
                     for (var i = 0; i < colors.length; i++) {
                         div.innerHTML +=
-                                '<i style="background:' + colors[i] + '"></i> ' +
-                                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+                            '<i style="background:' + colors[i] + '"></i> ' +
+                            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
                     }
 
                     return div;
@@ -470,9 +495,7 @@
             ];
 
             // set of markers of current selected floating experiment
-            $scope.selectedMarkers = [
-
-            ];
+            $scope.selectedMarkers = [];
 
             // load csv data for floating pts:
             $scope.dataAll = [];
@@ -512,8 +535,8 @@
                         };
                         $scope.markerdata.push(obj);
                         $scope.markerpts[0][i] = new L.marker(
-                                [obj.lng, obj.lat],
-                                {icon: orangeIcon}
+                            [obj.lng, obj.lat],
+                            {icon: orangeIcon}
                         ).bindPopup('Time: ' + videoStamp);
                     }
                     $scope.dataAll.push($scope.markerdata);
@@ -552,8 +575,8 @@
                                 };
                                 $scope.markerdata.push(obj);
                                 $scope.markerpts[1][i] = new L.marker(
-                                        [obj.lng, obj.lat],
-                                        {icon: tealIcon}
+                                    [obj.lng, obj.lat],
+                                    {icon: tealIcon}
                                 ).bindPopup('Time: ' + videoStamp);
                             }
                             $scope.dataAll.push($scope.markerdata);
@@ -592,8 +615,8 @@
                                         };
                                         $scope.markerdata.push(obj);
                                         $scope.markerpts[2][i] = new L.marker(
-                                                [obj.lng, obj.lat],
-                                                {icon: purpleIcon}
+                                            [obj.lng, obj.lat],
+                                            {icon: purpleIcon}
                                         ).bindPopup('Time: ' + videoStamp);
                                     }
                                     $scope.dataAll.push($scope.markerdata);
@@ -660,7 +683,7 @@
                 "Aspect": aspectLayer,
                 "Slope": slopeLayer,
                 "Hillshade": hillshadeLayer,
-                "Classification": classificationLayer,
+                //"Classification": classificationLayer, # must be added from the shp function
                 "Floating Points": markersDummyLayer
             };
 
@@ -718,9 +741,9 @@
                     map.setView($scope.centerExperiments[$scope.selectedFloatingData], 21);
 
                     $timeout(function () {
-                        window.dispatchEvent(new Event('resize'));
-                    },
-                            200);
+                            window.dispatchEvent(new Event('resize'));
+                        },
+                        200);
 
                     $scope.previousSelectedFloatingData = $scope.selectedFloatingData;
                 }
@@ -775,9 +798,9 @@
 
                 // 4. update window:
                 $timeout(function () {
-                    window.dispatchEvent(new Event('resize'));
-                },
-                        200);
+                        window.dispatchEvent(new Event('resize'));
+                    },
+                    200);
 
             };
             $scope.onOverlayRemove = function (e) {
@@ -840,9 +863,9 @@
 
                 // 4. update window:
                 $timeout(function () {
-                    window.dispatchEvent(new Event('resize'));
-                },
-                        200);
+                        window.dispatchEvent(new Event('resize'));
+                    },
+                    200);
             };
 
             map.on('overlayadd', $scope.onOverlayAdd);
@@ -932,9 +955,9 @@
                 // 5. set videotime back to 0:00:
                 $scope.videoTime = "0:00";
                 $timeout(function () {
-                    window.dispatchEvent(new Event('resize'));
-                },
-                        200);
+                        window.dispatchEvent(new Event('resize'));
+                    },
+                    200);
                 $scope.previousSelectedFloatingData = $scope.selectedFloatingData;
             }
         };
@@ -978,11 +1001,10 @@
         };
 
         $timeout(function () {
-            window.dispatchEvent(new Event('resize'));
-        },
-                200);
-    }
-    ;
+                window.dispatchEvent(new Event('resize'));
+            },
+            200);
+    };
     angular.module('UASWebApp')
             .controller('MainCtrl', MainCtrl)
             ;

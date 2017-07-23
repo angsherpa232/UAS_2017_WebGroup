@@ -23,7 +23,8 @@
     "gulp-uglify": "^2.1.2",
     "jquery": "^3.2.1",
     "main-bower-files": "^2.13.1",
-    "stream-series": "^0.1.1"
+    "stream-series": "^0.1.1",
+    "shpjs": "^3.4.0"
   },
   "description": "responsive website of UAV WebApp",
   "main": "index.js",
