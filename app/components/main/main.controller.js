@@ -155,7 +155,7 @@
                         x < 50.8 ? '#f03b20' :
                             '#f01010';
             };
-            $scope.getColors = function () {
+            $scope.getFlightPlanColors = function () {
                 return ['#ffeda0', '#feb24c', '#f03b20', '#f01010'];
             };
 
@@ -246,10 +246,11 @@
                 });
 
             var descriptionBox = L.control({position: 'bottomleft'});
-            var legendDEM = L.control({position: 'bottomright'});
+            var DEMLegend = L.control({position: 'bottomright'});
 
             var legendCenterButton = L.control({position: 'bottomright'});
             var flightPlanLegend = L.control({position: 'bottomright'});
+            var classificationLegend = L.control({position: 'bottomright'});
 
             $scope.loadLegends = function () {
                 /*Layers Legend*/
@@ -365,7 +366,7 @@
                 /*End DEM Legend*/
 
                 /*DEM Legend*/
-                legendDEM.onAdd = function () {
+                DEMLegend.onAdd = function () {
                     var div = L.DomUtil.create('DEM', 'DEM-legend');
 
                     div.innerHTML = '<b>DSM Scale (m)</b> <br>';
@@ -387,7 +388,7 @@
 
                     return div;
                 };
-                // legendDEM.addTo(map); //Added by default
+                // DEMLegend.addTo(map); //Added by default
                 /*End DEM Legend*/
 
                 /*Flight Plan Legend*/
@@ -396,7 +397,7 @@
 
                     div.innerHTML = '<b>Flight Plan Altitude (m): </b>' + '<br>';
 
-                    var colors = $scope.getColors();
+                    var colors = $scope.getFlightPlanColors();
 
                     var grades = [0, 46, 48.1, 50.8];
 
@@ -404,6 +405,23 @@
                         div.innerHTML +=
                             '<i style="background:' + colors[i] + '"></i> ' +
                             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+                    }
+
+                    return div;
+                };
+
+                /*Classification Legend*/
+                classificationLegend.onAdd = function () {
+                    var div = L.DomUtil.create('fligthPlandLegend', 'flight-plan-legend');
+
+                    div.innerHTML = '<b>Classification: </b>' + '<br>';
+
+                    var classType = ["Agriculture", "Grass", "Road / Bare soil", "Shrub", "Trees", "Water"];
+
+                    for (var i = 0; i < classType.length; i++) {
+                        div.innerHTML +=
+                            '<i style="background:' + getClassificationColor(classType[i]) + '"></i> ' +
+                            classType[i] + '<br>';
                     }
 
                     return div;
@@ -701,8 +719,8 @@
                     $scope.zoomRiver();
                 }
                 if (e.name === 'DSM') {
-                    map.removeControl(legendDEM);
-                    legendDEM.addTo(map);
+                    map.removeControl(DEMLegend);
+                    DEMLegend.addTo(map);
                     $("#DSM").css("display", "");
                     $scope.zoomRiver();
                 }
@@ -781,6 +799,7 @@
 
                 if (e.name === 'Classification') {
                     $("#Classification").css("display", "");
+                    classificationLegend.addTo(map);
                     $scope.zoomRiver();
                 }
 
@@ -808,7 +827,7 @@
                     $("#Mosaic").css("display", "none");
                 }
                 if (e.name === 'DSM') {
-                    map.removeControl(legendDEM);
+                    map.removeControl(DEMLegend);
                     $("#DSM").css("display", "none");
                 }
                 if (e.name === "Floating Points") {
@@ -850,6 +869,7 @@
                 }
 
                 if (e.name === 'Classification') {
+                    map.removeControl(classificationLegend);
                     $("#Classification").css("display", "none");
                 }
 
