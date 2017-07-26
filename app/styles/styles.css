@@ -4,6 +4,9 @@
   transition: 0.5s linear all;
   opacity: 0; }
 
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+  background-color: #1a8064; }
+
 /* The finishing CSS styles for the enter animation */
 .fade.ng-enter.ng-enter-active {
   opacity: 1; }
@@ -237,6 +240,21 @@ html, body {
   width: 150px;
   color: #5e6779; }
 
+.videopage .button {
+  background-color: #1a8064;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px; }
+
+.videopage .button:hover {
+  background-color: #1a8064;
+  /* Green */ }
+
 .aboutpage h1 {
   text-align: center; }
 
@@ -298,6 +316,16 @@ html, body {
   .homepage .photo-credits {
     font-size: 10px;
     text-align: right; }
+  .homepage .button {
+    background-color: #1a8064;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px; }
 
 .md-select-menu-container {
   z-index: 1005; }
